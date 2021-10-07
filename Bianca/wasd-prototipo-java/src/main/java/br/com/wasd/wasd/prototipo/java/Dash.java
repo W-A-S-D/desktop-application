@@ -19,8 +19,12 @@ import com.profesorfalken.jsensors.model.components.Components;
 import com.profesorfalken.jsensors.model.components.Gpu;
 import com.profesorfalken.jsensors.model.sensors.Fan;
 import com.profesorfalken.jsensors.model.sensors.Temperature;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,7 +36,7 @@ public class Dash extends javax.swing.JFrame {
     /**
      * Creates new form Dash
      */
-    public Dash() {
+    public Dash() throws UnknownHostException {
         initComponents();
         this.setLocationRelativeTo(null);
         getGpu();
@@ -61,7 +65,7 @@ public class Dash extends javax.swing.JFrame {
         lblCpu = new javax.swing.JLabel();
         lblUsoMemoria = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblNome = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblSO = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -74,6 +78,7 @@ public class Dash extends javax.swing.JFrame {
         lblGpu = new javax.swing.JLabel();
         lblTempGpu = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,9 +119,9 @@ public class Dash extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Disco:");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Máquina");
+        lblNome.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblNome.setForeground(new java.awt.Color(255, 255, 255));
+        lblNome.setText("nome");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -156,11 +161,15 @@ public class Dash extends javax.swing.JFrame {
 
         lblTempGpu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblTempGpu.setForeground(new java.awt.Color(255, 255, 255));
-        lblTempGpu.setText("0.0");
+        lblTempGpu.setText("0 °C");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Temperatura GPU:");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Máquina");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -169,11 +178,6 @@ public class Dash extends javax.swing.JFrame {
             .addComponent(jSeparator2)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblSO))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -208,27 +212,36 @@ public class Dash extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(lblCPU))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblMemoria))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblGpu)))))
+                                .addComponent(lblGpu))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblMemoria))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblNome)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblSO)))
                 .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 700, Short.MAX_VALUE)))
+                    .addGap(0, 702, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblSO))
+                    .addComponent(lblNome)
+                    .addComponent(lblSO)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -264,13 +277,13 @@ public class Dash extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(lblDisco))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 481, Short.MAX_VALUE)))
+                    .addGap(0, 517, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -281,7 +294,7 @@ public class Dash extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -328,7 +341,11 @@ public class Dash extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Dash().setVisible(true);
+                try {
+                    new Dash().setVisible(true);
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(Dash.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -338,15 +355,17 @@ public class Dash extends javax.swing.JFrame {
         Processador processador = looca.getProcessador();
     }
 
-    public void getHardware() {
+    public void getHardware() throws UnknownHostException {
         Looca looca = new Looca();
         Sistema sistema = looca.getSistema();
         Memoria memoria = looca.getMemoria();
         Processador processador = looca.getProcessador();
+        String hostname = InetAddress.getLocalHost().getHostName();
 
         lblCPU.setText(processador.getNome());
         lblMemoria.setText(Conversor.formatarBytes(memoria.getTotal()));
         lblSO.setText(sistema.getSistemaOperacional());
+        lblNome.setText(hostname);
 
     }
 
@@ -367,13 +386,6 @@ public class Dash extends javax.swing.JFrame {
                         System.out.println(temp.name + ": " + temp.value + " C");
                         lblTempGpu.setText(temp.value + " C");
                     });
-
-                    
-//                    //Print fan speed
-//                    List<Fan> fans = gpu.sensors.fans;
-//                    fans.forEach(fan -> {
-//                        System.out.println(fan.name + ": " + fan.value + " RPM");
-//                    });
                 }
             }
         }
@@ -412,7 +424,7 @@ public class Dash extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -433,6 +445,7 @@ public class Dash extends javax.swing.JFrame {
     private javax.swing.JLabel lblGpu;
     private javax.swing.JLabel lblMemoria;
     private javax.swing.JLabel lblMemoriaDisponivel;
+    private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblSO;
     private javax.swing.JLabel lblTempGpu;
     private javax.swing.JLabel lblUsoMemoria;
