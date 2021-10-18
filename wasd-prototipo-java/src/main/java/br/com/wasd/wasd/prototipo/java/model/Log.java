@@ -15,7 +15,6 @@ public class Log {
     private Double  freq_cpu;
     private Double  uso_ram;
     private Double  uso_disco;
-    private Double  uso_gpu;
     private Double  temperatura;
     private String  criado;
 
@@ -57,14 +56,6 @@ public class Log {
 
     public void setUso_disco(Double uso_disco) {
         this.uso_disco = uso_disco;
-    }
-
-    public Double getUso_gpu() {
-        return uso_gpu;
-    }
-
-    public void setUso_gpu(Double uso_gpu) {
-        this.uso_gpu = uso_gpu;
     }
 
     public Double getTemperatura() {

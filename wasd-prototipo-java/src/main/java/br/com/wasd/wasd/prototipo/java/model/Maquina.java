@@ -13,10 +13,6 @@ public class Maquina {
     private Double gpu;
     private String status;
     
-    
-    
-    
-
     public Integer getMaquina_id() {
         return maquina_id;
     }

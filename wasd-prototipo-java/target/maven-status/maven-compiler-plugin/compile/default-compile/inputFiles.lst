@@ -1,14 +1,15 @@
-<<<<<<< HEAD
-C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Desktop.java
-C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Login.java
-C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\UsuarioDAO.java
-C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Connection.java
-C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Usuario.java
-C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\mapper\UsuarioMapper.java
-C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\DAO.java
-=======
-D:\Yuu\Bandtec\2021-2\Pesquisa e Inovação II\wasd\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Usuario.java
-D:\Yuu\Bandtec\2021-2\Pesquisa e Inovação II\wasd\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Connection.java
-D:\Yuu\Bandtec\2021-2\Pesquisa e Inovação II\wasd\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Desktop.java
-D:\Yuu\Bandtec\2021-2\Pesquisa e Inovação II\wasd\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Login.java
->>>>>>> d62210d86acad5e4d72e775e18128691f6778e09
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\ProcessosDao.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Log.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\mapper\UsuarioMapper.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\DAO.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Teste.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\LogDao.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Usuario.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\ConversorDouble.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Desktop.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Login.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Connection.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Maquina.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\MaquinaDao.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Processos.java
+C:\Users\bianc\Downloads\WASD\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\UsuarioDAO.java
