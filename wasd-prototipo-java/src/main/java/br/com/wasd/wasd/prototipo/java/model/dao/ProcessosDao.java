@@ -22,7 +22,7 @@ public class ProcessosDao implements DAO {
 
     public void cadastrarProcesso(Processo processo) {
 
-        String sql = "insert into Processos values (null, 1, ?, '2021-10-18 00:16:02', , null)";
+        String sql = "insert into Processos values (null, 1, ?, 'executando', '2021-10-18 00:16:02', null)";
 
         jdbcTemplate.update(sql, processo.getNome());
 
