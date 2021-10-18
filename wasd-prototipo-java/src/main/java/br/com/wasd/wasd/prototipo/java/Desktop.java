@@ -5,6 +5,7 @@
  */
 package br.com.wasd.wasd.prototipo.java;
 
+import br.com.wasd.wasd.prototipo.java.model.dao.ProcessosDao;
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.discos.DiscosGroup;
 import com.github.britooo.looca.api.group.discos.Volume;
@@ -394,6 +395,8 @@ public class Desktop extends javax.swing.JFrame {
 
     public void getHardwareUse() {
         Looca looca = new Looca();
+        
+        ProcessosDao processosDao = new ProcessosDao();
 
         DecimalFormat saida = new DecimalFormat("0.00");
 
@@ -404,6 +407,7 @@ public class Desktop extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tbProcessos.getModel();
 
         Memoria memoria = looca.getMemoria();
+        
         Processador processador = looca.getProcessador();
 
         DiscosGroup grupoDeDiscos = looca.getGrupoDeDiscos();
@@ -415,6 +419,7 @@ public class Desktop extends javax.swing.JFrame {
         });
 
         processos.forEach(processo -> {
+            processosDao.cadastrarProcesso(processo);
             Object[] processosAtuais = {processo.getNome(), saida.format(processo.getUsoCpu()), saida.format(processo.getUsoMemoria())};
             model.addRow(processosAtuais);
         });
