@@ -24,7 +24,6 @@ import com.profesorfalken.jsensors.model.sensors.Temperature;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -454,7 +453,7 @@ public class Desktop extends javax.swing.JFrame {
         }
 
         processos.forEach(processo -> {
-            processosDao.cadastrarProcesso(processo);
+            // processosDao.cadastrarProcesso(processo);
             
             Object[] processosAtuais = {processo.getNome(), saida.format(processo.getUsoCpu()), saida.format(processo.getUsoMemoria())};
             model.addRow(processosAtuais);

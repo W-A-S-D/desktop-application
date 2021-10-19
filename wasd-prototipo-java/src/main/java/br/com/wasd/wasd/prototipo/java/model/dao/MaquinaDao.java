@@ -6,7 +6,6 @@
 package br.com.wasd.wasd.prototipo.java.model.dao;
 
 import br.com.wasd.wasd.prototipo.java.Connection;
-import com.github.britooo.looca.api.group.processos.Processo;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -21,7 +20,7 @@ public class MaquinaDao implements DAO {
 
     public void cadastrar(String nome, String so, String processador, Double ram, Double disco, String gpu) {
 
-        String sql = "insert into maquina values (null, ?, ?, ?, ?, ?, ?, 'Funcionando')";
+        String sql = "insert into maquina(nome, so, cpu, ram, disco, gpu, status) values (?, ?, ?, ?, ?, ?, 'Ok')";
 
         jdbcTemplate.update(sql, nome, so, processador, ram, disco, gpu);
 

@@ -8,7 +8,6 @@ package br.com.wasd.wasd.prototipo.java.model.dao;
 import br.com.wasd.wasd.prototipo.java.Connection;
 import com.github.britooo.looca.api.group.processos.Processo;
 import java.util.List;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -22,7 +21,7 @@ public class ProcessosDao implements DAO {
 
     public void cadastrarProcesso(Processo processo) {
 
-        String sql = "insert into Processos values (null, 1, ?, 'executando', '2021-10-18 00:16:02', null)";
+        String sql = "insert into processos(fk_maquina, nome, status, iniciado) values (3, ?, 'executando', '2021-10-18 00:16:02')";
 
         jdbcTemplate.update(sql, processo.getNome());
 

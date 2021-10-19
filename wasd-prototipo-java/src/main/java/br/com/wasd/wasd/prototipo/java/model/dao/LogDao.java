@@ -16,7 +16,7 @@ public class LogDao implements DAO {
 
     public void cadastrar(Double usoCpu, Double usoRam, Double usoDisco, Double temp) {
 
-        String sql = "insert into log values (null, 1, ?, ?, ?, ?, '2021-10-18 12:10:02')";
+        String sql = "insert into log(fk_maquina, freq_cpu, uso_ram, uso_disco, temperatura, criado) values (3, ?, ?, ?, ?, '2021-10-18 12:10:02')";
 
         jdbcTemplate.update(sql, usoCpu, usoRam, usoDisco, temp);
 

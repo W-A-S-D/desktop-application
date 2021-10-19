@@ -5,14 +5,14 @@ import org.apache.commons.dbcp2.BasicDataSource;
 public class Connection {
 
     private BasicDataSource dataSource;
-    
+
     public Connection() {
         dataSource = new BasicDataSource();
 
-        dataSource​.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource​.setUrl("jdbc:mysql://localhost:3306/wasd");
+        dataSource​.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        dataSource.setUrl("jdbc:sqlserver://bdwasdmonitoramento.database.windows.net:1433;database=bdWasdMonitoramento;user=wasd@bdwasdmonitoramento;password=#Gfgrupo5;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;");
         dataSource​.setUsername("wasd");
-        dataSource​.setPassword("1234");
+        dataSource​.setPassword("#Gfgrupo5");
 
     }
 
