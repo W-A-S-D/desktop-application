@@ -23,5 +23,5 @@ public class UsuarioMapper implements RowMapper<Usuario> {
         usuario.setAtualizado(rs.getString("atualizado"));
 
         return usuario;
-    }
+    }    
 }

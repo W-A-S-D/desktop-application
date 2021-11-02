@@ -9,7 +9,6 @@ public class Maquina {
     private String so;
     private Double cpu;
     private Double ram;
-    private Double disco;
     private Double gpu;
     private String status;
     
@@ -51,14 +50,6 @@ public class Maquina {
 
     public void setRam(Double ram) {
         this.ram = ram;
-    }
-
-    public Double getDisco() {
-        return disco;
-    }
-
-    public void setDisco(Double disco) {
-        this.disco = disco;
     }
 
     public Double getGpu() {

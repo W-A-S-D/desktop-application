@@ -6,23 +6,25 @@
 package br.com.wasd.wasd.prototipo.java.model.dao;
 
 import br.com.wasd.wasd.prototipo.java.Connection;
+import br.com.wasd.wasd.prototipo.java.model.DiscoMaquina;
+import com.github.britooo.looca.api.group.processos.Processo;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
- * @author bianc
+ * @author byumi
  */
-public class MaquinaDao implements DAO {
+public class DiscoDao implements DAO{
     
     private Connection config = new Connection();
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(config.getDataSource());
 
-    public void cadastrar(String nome, String so, String processador, Double ram, String gpu) {
+    public void cadastrarDisco(DiscoMaquina disco) {
 
-        String sql = "insert into maquina(nome, so, cpu, ram, gpu, status) values (?, ?, ?, ?, ?, 'Ok')";
+        String sql = "insert into disco(fk_maquina, nome_disco, volume_disco) values (3, ?, ?)";
 
-        jdbcTemplate.update(sql, nome, so, processador, ram, gpu);
+        jdbcTemplate.update(sql, disco.getNome_disco(), disco.getVolume_disco());
 
         System.out.println("Inserido com sucesso!");
     }

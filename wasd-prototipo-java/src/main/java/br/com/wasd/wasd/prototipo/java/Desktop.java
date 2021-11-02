@@ -6,9 +6,12 @@
 package br.com.wasd.wasd.prototipo.java;
 
 import br.com.wasd.wasd.prototipo.java.model.dao.LogDao;
+import br.com.wasd.wasd.prototipo.java.model.DiscoMaquina;
+import br.com.wasd.wasd.prototipo.java.model.dao.DiscoDao;
 import br.com.wasd.wasd.prototipo.java.model.dao.MaquinaDao;
 import br.com.wasd.wasd.prototipo.java.model.dao.ProcessosDao;
 import com.github.britooo.looca.api.core.Looca;
+import com.github.britooo.looca.api.group.discos.Disco;
 import com.github.britooo.looca.api.group.discos.DiscosGroup;
 import com.github.britooo.looca.api.group.discos.Volume;
 import com.github.britooo.looca.api.group.memoria.Memoria;
@@ -37,6 +40,7 @@ public class Desktop extends javax.swing.JFrame {
 
     /**
      * Creates new form Dash
+     *
      * @throws java.net.UnknownHostException
      */
     public Desktop() throws UnknownHostException {
@@ -360,85 +364,87 @@ public class Desktop extends javax.swing.JFrame {
 
     public void getHardware() throws UnknownHostException {
         String so, cpu, gpuNome = "Sem GPU no sistema";
-        Long ram, disco = 0L;
-        
+        Long ram = 0L;
+
         // Dados da API Looca
         Looca looca = new Looca();
         Sistema sistema = looca.getSistema();
         Memoria memoria = looca.getMemoria();
         Processador processador = looca.getProcessador();
         String hostname = InetAddress.getLocalHost().getHostName();
-        
+
         DiscosGroup grupoDeDiscos = looca.getGrupoDeDiscos();
-        List<Volume> discoVolume = grupoDeDiscos.getVolumes();
-        
+        List<Disco> disco = grupoDeDiscos.getDiscos();
+
         // Dados da GPU - Jsensors
         Components componentes = JSensors.get.components();
         List<Gpu> gpus = componentes.gpus;
-        
+
         MaquinaDao maquinaDao = new MaquinaDao();
-         
+        DiscoDao discoDao = new DiscoDao();
+        
         so = sistema.getSistemaOperacional();
         cpu = processador.getNome();
         ram = memoria.getTotal();
-        
-        for (Volume volume: discoVolume) {
-            disco = volume.getTotal();
+
+        for (Disco d : disco) {
+            DiscoMaquina discoMaquina = new DiscoMaquina(1, d.getNome(), ConversorDouble.formatarBytes(d.getTamanho()));
+            discoDao.cadastrarDisco(discoMaquina);
         }
-       
+
         if (gpus != null) {
             for (final Gpu gpu : gpus) {
-                 gpuNome = gpu.name;
+                gpuNome = gpu.name;
             }
         }
-                
+
         lblGpu.setText(gpuNome);
         lblCPU.setText(cpu);
         lblMemoria.setText(Conversor.formatarBytes(ram));
         lblSO.setText(so);
         lblNome.setText(hostname);
-        
-        maquinaDao.cadastrar(hostname, so, cpu, ConversorDouble.formatarBytes(ram), ConversorDouble.formatarBytes(disco),gpuNome);
+
+        maquinaDao.cadastrar(hostname, so, cpu, ConversorDouble.formatarBytes(ram), gpuNome);
     }
 
     public void getHardwareUse() {
         Long usoRam, usoDisco = 0L;
         Double usoCpu, temperaturaGpu = 0.0;
-                
+
         //Dados da api looca        
         Looca looca = new Looca();
-        
+
         ProcessosGroup grupoDeProcessos = looca.getGrupoDeProcessos();
         List<Processo> processos = grupoDeProcessos.getProcessos();
-        
+
         Processador processador = looca.getProcessador();
         Memoria memoria = looca.getMemoria();
 
         DiscosGroup grupoDeDiscos = looca.getGrupoDeDiscos();
         List<Volume> discoVolume = grupoDeDiscos.getVolumes();
-        
+
         // Dados da GPU - Jsensors
         Components componentes = JSensors.get.components();
         List<Gpu> gpus = componentes.gpus;
-        
+
         //Classe para inserção de dados
         ProcessosDao processosDao = new ProcessosDao();
         LogDao logDao = new LogDao();
-        
+
         DecimalFormat saida = new DecimalFormat("0.00");
 
         DefaultTableModel model = (DefaultTableModel) tbProcessos.getModel();
-        
+
         usoCpu = processador.getUso();
         usoRam = memoria.getEmUso();
-        
+
         if (gpus != null) {
             for (final Gpu gpu : gpus) {
                 if (gpu.sensors != null) {
                     System.out.println("Sensors: ");
                     //Print temperatures
                     List<Temperature> temps = gpu.sensors.temperatures;
-                    for (final Temperature temp: temps) {
+                    for (final Temperature temp : temps) {
                         System.out.println(temp.name + ": " + temp.value + " C");
                         temperaturaGpu = temp.value;
                         lblTempGpu.setText(temp.value + " C");
@@ -446,15 +452,15 @@ public class Desktop extends javax.swing.JFrame {
                 }
             }
         }
-        
-        for (Volume volume: discoVolume) {
+
+        for (Volume volume : discoVolume) {
             usoDisco = volume.getDisponivel();
             lblDisco.setText(Conversor.formatarBytes(volume.getDisponivel()));
         }
 
         processos.forEach(processo -> {
             // processosDao.cadastrarProcesso(processo);
-            
+
             Object[] processosAtuais = {processo.getNome(), saida.format(processo.getUsoCpu()), saida.format(processo.getUsoMemoria())};
             model.addRow(processosAtuais);
         });
@@ -462,7 +468,7 @@ public class Desktop extends javax.swing.JFrame {
         lblUsoMemoria.setText(Conversor.formatarBytes(usoRam));
         lblMemoriaDisponivel.setText(Conversor.formatarBytes(memoria.getDisponivel()));
         lblCpu.setText(usoCpu.toString());
-        
+
         logDao.cadastrar(usoCpu, ConversorDouble.formatarBytes(usoRam), ConversorDouble.formatarBytes(usoDisco), temperaturaGpu);
     }
 
