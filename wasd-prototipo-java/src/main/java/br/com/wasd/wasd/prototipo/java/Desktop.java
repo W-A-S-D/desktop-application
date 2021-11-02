@@ -7,6 +7,7 @@ package br.com.wasd.wasd.prototipo.java;
 
 import br.com.wasd.wasd.prototipo.java.model.dao.LogDao;
 import br.com.wasd.wasd.prototipo.java.model.DiscoMaquina;
+import br.com.wasd.wasd.prototipo.java.model.Log;
 import br.com.wasd.wasd.prototipo.java.model.dao.DiscoDao;
 import br.com.wasd.wasd.prototipo.java.model.dao.MaquinaDao;
 import br.com.wasd.wasd.prototipo.java.model.dao.ProcessosDao;
@@ -469,7 +470,8 @@ public class Desktop extends javax.swing.JFrame {
         lblMemoriaDisponivel.setText(Conversor.formatarBytes(memoria.getDisponivel()));
         lblCpu.setText(usoCpu.toString());
 
-        logDao.cadastrar(usoCpu, ConversorDouble.formatarBytes(usoRam), ConversorDouble.formatarBytes(usoDisco), temperaturaGpu);
+        Log log = new Log(1,usoCpu, ConversorDouble.formatarBytes(usoRam), ConversorDouble.formatarBytes(usoDisco), temperaturaGpu);
+        logDao.cadastrar(log);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

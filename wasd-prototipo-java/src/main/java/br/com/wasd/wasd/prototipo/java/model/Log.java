@@ -5,6 +5,8 @@
  */
 package br.com.wasd.wasd.prototipo.java.model;
 
+import java.time.LocalDateTime;
+
 /**
  *
  * @author ELIZEULUISSOUZA
@@ -16,7 +18,18 @@ public class Log {
     private Double  uso_ram;
     private Double  uso_disco;
     private Double  temperatura;
-    private String  criado;
+    private LocalDateTime  criado;
+
+    public Log(Integer fk_maquina, Double freq_cpu, Double uso_ram, Double uso_disco, Double temperatura) {
+        this.fk_maquina = fk_maquina;
+        this.freq_cpu = freq_cpu;
+        this.uso_ram = uso_ram;
+        this.uso_disco = uso_disco;
+        this.temperatura = temperatura;
+        criado = LocalDateTime.now();
+    }
+    
+    
 
     public Integer getLog_id() {
         return log_id;
@@ -66,11 +79,11 @@ public class Log {
         this.temperatura = temperatura;
     }
 
-    public String getCriado() {
+    public LocalDateTime getCriado() {
         return criado;
     }
 
-    public void setCriado(String criado) {
+    public void setCriado(LocalDateTime criado) {
         this.criado = criado;
     }       
 }
