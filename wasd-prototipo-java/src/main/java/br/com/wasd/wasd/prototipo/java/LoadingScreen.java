@@ -22,6 +22,7 @@ public class LoadingScreen extends javax.swing.JFrame {
             Logger.getLogger(LoadingScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -73,14 +74,16 @@ public class LoadingScreen extends javax.swing.JFrame {
         BackgroundColor.setLayout(BackgroundColorLayout);
         BackgroundColorLayout.setHorizontalGroup(
             BackgroundColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LoadingBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(LoadingBar, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
             .addGroup(BackgroundColorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(LoadingLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 553, Short.MAX_VALUE)
-                .addComponent(LoadingValue, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(BackgroundColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(gif_wasd, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(BackgroundColorLayout.createSequentialGroup()
+                        .addComponent(LoadingLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 553, Short.MAX_VALUE)
+                        .addComponent(LoadingValue, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addComponent(gif_wasd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         BackgroundColorLayout.setVerticalGroup(
             BackgroundColorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -14,7 +14,7 @@ public class UsuarioDAO implements DAO {
 
     public Usuario login(String login, String senha) {
 
-        String sql = "select * from USUARIO where login =? and senha=? COLLATE SQL_Latin1_General_CP1_CS_AS";
+        String sql = "select * from USUARIO where email =? and senha=? COLLATE SQL_Latin1_General_CP1_CS_AS";
         try {
             return jdbcTemplate.queryForObject(sql, new Object[]{login, senha}, new UsuarioMapper());
 

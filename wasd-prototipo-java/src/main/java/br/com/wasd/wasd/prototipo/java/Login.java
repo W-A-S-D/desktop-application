@@ -8,6 +8,7 @@ package br.com.wasd.wasd.prototipo.java;
 import br.com.wasd.wasd.prototipo.java.model.Usuario;
 import br.com.wasd.wasd.prototipo.java.model.dao.UsuarioDAO;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -194,27 +195,27 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         String login, senha;
 
         login = txtUser.getText();
         senha = String.valueOf(txtSenha.getPassword());
         System.out.println(senha);
-        
+
         Usuario usuario;
         UsuarioDAO dao = new UsuarioDAO();
-        
+
         usuario = dao.login(login, senha);
-        
-        if(usuario != null) {
-            JOptionPane.showMessageDialog(null, "Bem vindo");
+
+        if (usuario != null) {
+            new LoadingScreen().setVisible(true);
+            this.dispose();
             try {
                 new Desktop().setVisible(true);
             } catch (UnknownHostException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Senha/Usuário incorreto");
         }
