@@ -20,7 +20,7 @@ public class MaquinaDao implements DAO {
 
     public void cadastrar(String nome, String so, String processador, Double ram, String gpu) {
 
-        String sql = "insert into maquina(nome, so, cpu, ram, gpu, status) values (?, ?, ?, ?, ?, 'Ok')";
+        String sql = "insert into maquina(fk_setor, nome, so, cpu, ram, gpu, status) values (2, ?, ?, ?, ?, ?, 'Ok')";
 
         jdbcTemplate.update(sql, nome, so, processador, ram, gpu);
 

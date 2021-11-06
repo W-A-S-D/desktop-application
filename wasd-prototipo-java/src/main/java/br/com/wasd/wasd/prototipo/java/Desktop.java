@@ -383,7 +383,7 @@ public class Desktop extends javax.swing.JFrame {
 
         MaquinaDao maquinaDao = new MaquinaDao();
         DiscoDao discoDao = new DiscoDao();
-        
+
         so = sistema.getSistemaOperacional();
         cpu = processador.getNome();
         ram = memoria.getTotal();
@@ -470,7 +470,8 @@ public class Desktop extends javax.swing.JFrame {
         lblMemoriaDisponivel.setText(Conversor.formatarBytes(memoria.getDisponivel()));
         lblCpu.setText(usoCpu.toString());
 
-        Log log = new Log(1,usoCpu, ConversorDouble.formatarBytes(usoRam), ConversorDouble.formatarBytes(usoDisco), temperaturaGpu);
+        // ConversorDouble.formatarBytes(usoDisco)
+        Log log = new Log(1, usoCpu, ConversorDouble.formatarBytes(usoRam), temperaturaGpu);
         logDao.cadastrar(log);
     }
 

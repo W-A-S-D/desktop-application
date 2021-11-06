@@ -16,15 +16,13 @@ public class Log {
     private Integer fk_maquina;
     private Double  freq_cpu;
     private Double  uso_ram;
-    private Double  uso_disco;
     private Double  temperatura;
     private LocalDateTime  criado;
 
-    public Log(Integer fk_maquina, Double freq_cpu, Double uso_ram, Double uso_disco, Double temperatura) {
+    public Log(Integer fk_maquina, Double freq_cpu, Double uso_ram, Double temperatura) {
         this.fk_maquina = fk_maquina;
         this.freq_cpu = freq_cpu;
         this.uso_ram = uso_ram;
-        this.uso_disco = uso_disco;
         this.temperatura = temperatura;
         criado = LocalDateTime.now();
     }
@@ -61,14 +59,6 @@ public class Log {
 
     public void setUso_ram(Double uso_ram) {
         this.uso_ram = uso_ram;
-    }
-
-    public Double getUso_disco() {
-        return uso_disco;
-    }
-
-    public void setUso_disco(Double uso_disco) {
-        this.uso_disco = uso_disco;
     }
 
     public Double getTemperatura() {
