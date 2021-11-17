@@ -19,6 +19,7 @@ br\com\wasd\wasd\prototipo\java\model\Log.class
 br\com\wasd\wasd\prototipo\java\LoadingScreen.class
 br\com\wasd\wasd\prototipo\java\Connection.class
 br\com\wasd\wasd\prototipo\java\mapper\UsuarioMapper.class
+br\com\wasd\wasd\prototipo\java\ProgressBar.class
 br\com\wasd\wasd\prototipo\java\model\dao\ProcessosDao.class
 br\com\wasd\wasd\prototipo\java\Login$4.class
 br\com\wasd\wasd\prototipo\java\model\Processos.class

@@ -195,7 +195,7 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         String login, senha;
 
@@ -208,13 +208,16 @@ public class Login extends javax.swing.JFrame {
 
         usuario = dao.login(login, senha);
 
+        ProgressBar bar = new ProgressBar();
         if (usuario != null) {
-            new LoadingScreen().setVisible(true);
-            this.dispose();
+            bar.iniciaBar();
             try {
                 new Desktop().setVisible(true);
+                bar.paraBar();
+                this.dispose();
             } catch (UnknownHostException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                bar.paraBar();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Senha/Usuário incorreto");
@@ -255,7 +258,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
     private javax.swing.JLabel jLabel1;

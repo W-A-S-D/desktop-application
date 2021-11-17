@@ -20,7 +20,7 @@ public class LoadingScreen extends javax.swing.JFrame {
             Logger.getLogger(LoadingScreen.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(LoadingScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }        
         initComponents();
         this.setLocationRelativeTo(null);
     }
