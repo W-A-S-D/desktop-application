@@ -21,20 +21,15 @@ public class MaquinaDao implements DAO {
 
     public void cadastrar(String nome, String so, String processador, Double ram, String gpu) {
 
-        String sql = "insert into maquina(fk_setor, login, senha, nome, so, cpu, ram, gpu, status) "
+       String sql = "insert into maquina(fk_setor, login, senha, nome, so, cpu, ram, gpu, status) "
                 + "values (2, 'teste', 'teste', ?, ?, ?, ?, ?, 'Ok')";
         
-      /*  String sql = "update maquina set "
-                + ", nome= ?"
-                + ", so= ?"
-                + ", cpu= ?"
-                + ", ram= ?"
-                + ", gpu= ?"
-                + ""; */
-
+       /* String sql = "UPDATE maquina SET nome=?, so=?, cpu=?, ram= ?, gpu=? WHERE email=?"; */
+       
         jdbcTemplate.update(sql, nome, so, processador, ram, gpu);
 
         System.out.println("Inserido com sucesso!");
+        System.out.println("Update feito"  + sql);
     }
 
     @Override
