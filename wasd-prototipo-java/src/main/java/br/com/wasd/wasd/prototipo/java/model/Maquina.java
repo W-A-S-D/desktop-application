@@ -1,10 +1,10 @@
-
 package br.com.wasd.wasd.prototipo.java.model;
 
-
 public class Maquina {
-    
+
     private Integer maquina_id;
+    private String login;
+    private String senha;
     private String nome;
     private String so;
     private Double cpu;
@@ -18,6 +18,22 @@ public class Maquina {
 
     public void setMaquina_id(Integer maquina_id) {
         this.maquina_id = maquina_id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getNome() {
@@ -67,9 +83,5 @@ public class Maquina {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
+
 }
-
-
-

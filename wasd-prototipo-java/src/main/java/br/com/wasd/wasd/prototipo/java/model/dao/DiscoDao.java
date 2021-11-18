@@ -22,7 +22,7 @@ public class DiscoDao implements DAO{
 
     public void cadastrarDisco(DiscoMaquina disco) {
 
-        String sql = "insert into disco(fk_maquina, nome_disco, volume_disco) values (3, ?, ?)";
+        String sql = "insert into disco(fk_maquina, nome, volume) values (3, ?, ?)";
 
         jdbcTemplate.update(sql, disco.getNome_disco(), disco.getVolume_disco());
 

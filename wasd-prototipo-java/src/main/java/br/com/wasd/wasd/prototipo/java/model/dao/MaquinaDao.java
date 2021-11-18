@@ -6,6 +6,7 @@
 package br.com.wasd.wasd.prototipo.java.model.dao;
 
 import br.com.wasd.wasd.prototipo.java.Connection;
+import br.com.wasd.wasd.prototipo.java.model.Maquina;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -20,7 +21,16 @@ public class MaquinaDao implements DAO {
 
     public void cadastrar(String nome, String so, String processador, Double ram, String gpu) {
 
-        String sql = "insert into maquina(nome, so, cpu, ram, gpu, status) values (?, ?, ?, ?, ?, 'Ok')";
+        String sql = "insert into maquina(fk_setor, login, senha, nome, so, cpu, ram, gpu, status) "
+                + "values (2, 'teste', 'teste', ?, ?, ?, ?, ?, 'Ok')";
+        
+      /*  String sql = "update maquina set "
+                + ", nome= ?"
+                + ", so= ?"
+                + ", cpu= ?"
+                + ", ram= ?"
+                + ", gpu= ?"
+                + ""; */
 
         jdbcTemplate.update(sql, nome, so, processador, ram, gpu);
 

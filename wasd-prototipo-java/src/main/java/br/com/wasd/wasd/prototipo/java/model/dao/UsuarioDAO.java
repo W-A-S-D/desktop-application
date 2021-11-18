@@ -12,11 +12,11 @@ public class UsuarioDAO implements DAO {
     private Connection config = new Connection();
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(config.getDataSource());
 
-    public Usuario login(String login, String senha) {
+    public Usuario login(String email, String senha) {
 
-        String sql = "select * from USUARIO where login =? and senha=? COLLATE SQL_Latin1_General_CP1_CS_AS";
+        String sql = "select * from USUARIO where email =? and senha=? COLLATE SQL_Latin1_General_CP1_CS_AS";
         try {
-            return jdbcTemplate.queryForObject(sql, new Object[]{login, senha}, new UsuarioMapper());
+            return jdbcTemplate.queryForObject(sql, new Object[]{email, senha}, new UsuarioMapper());
 
         } catch (EmptyResultDataAccessException e) {
             return null;

@@ -1,17 +1,19 @@
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\DiscoDao.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\MaquinaDao.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Connection.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Desktop.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\DiscoMaquina.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\LogDao.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\ConversorDouble.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\DAO.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\UsuarioDAO.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Usuario.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\mapper\DiscoMapper.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Maquina.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\ProcessosDao.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Processos.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Log.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\mapper\UsuarioMapper.java
-D:\documentos\BANDTEC\2 semestre\PI\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Login.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Desktop.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\mapper\DiscoMapper.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Login.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\UsuarioDAO.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\Connection.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Usuario.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\mapper\UsuarioMapper.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Maquina.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\MaquinaDao.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\DiscoMaquina.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\DiscoDao.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Log.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\ConversorDouble.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\LogDiscoDAO.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\ProcessosDao.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Log_disco.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\DAO.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\dao\LogDao.java
+C:\Users\Wesley\Desktop\W-A-S-D\desktop-application\wasd-prototipo-java\src\main\java\br\com\wasd\wasd\prototipo\java\model\Processos.java

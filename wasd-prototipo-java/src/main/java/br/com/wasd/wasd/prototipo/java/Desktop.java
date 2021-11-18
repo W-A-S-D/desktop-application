@@ -9,6 +9,7 @@ import br.com.wasd.wasd.prototipo.java.model.dao.LogDao;
 import br.com.wasd.wasd.prototipo.java.model.DiscoMaquina;
 import br.com.wasd.wasd.prototipo.java.model.Log;
 import br.com.wasd.wasd.prototipo.java.model.dao.DiscoDao;
+import br.com.wasd.wasd.prototipo.java.model.dao.LogDiscoDAO;
 import br.com.wasd.wasd.prototipo.java.model.dao.MaquinaDao;
 import br.com.wasd.wasd.prototipo.java.model.dao.ProcessosDao;
 import com.github.britooo.looca.api.core.Looca;
@@ -39,6 +40,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Desktop extends javax.swing.JFrame {
 
+    private Looca looca;
+    private Sistema sistema;
+    private Memoria memoria;
+    private Processador processador;
+    private DiscosGroup grupoDeDiscos;
+    private Components componentes; 
+
     /**
      * Creates new form Dash
      *
@@ -46,6 +54,13 @@ public class Desktop extends javax.swing.JFrame {
      */
     public Desktop() throws UnknownHostException {
         initComponents();
+        looca = new Looca();
+        sistema = looca.getSistema();
+        memoria = looca.getMemoria();
+        processador = looca.getProcessador();
+        grupoDeDiscos = looca.getGrupoDeDiscos();
+        componentes = JSensors.get.components();
+
         this.setLocationRelativeTo(null);
         getHardware();
         getHardwareUse();
@@ -356,34 +371,22 @@ public class Desktop extends javax.swing.JFrame {
                 }
             }
         });
-
-        Looca looca = new Looca();
-        Sistema sistema = looca.getSistema();
-        Memoria memoria = looca.getMemoria();
-        Processador processador = looca.getProcessador();
     }
 
     public void getHardware() throws UnknownHostException {
         String so, cpu, gpuNome = "Sem GPU no sistema";
         Long ram = 0L;
 
-        // Dados da API Looca
-        Looca looca = new Looca();
-        Sistema sistema = looca.getSistema();
-        Memoria memoria = looca.getMemoria();
-        Processador processador = looca.getProcessador();
         String hostname = InetAddress.getLocalHost().getHostName();
 
-        DiscosGroup grupoDeDiscos = looca.getGrupoDeDiscos();
         List<Disco> disco = grupoDeDiscos.getDiscos();
 
         // Dados da GPU - Jsensors
-        Components componentes = JSensors.get.components();
         List<Gpu> gpus = componentes.gpus;
 
         MaquinaDao maquinaDao = new MaquinaDao();
         DiscoDao discoDao = new DiscoDao();
-        
+
         so = sistema.getSistemaOperacional();
         cpu = processador.getNome();
         ram = memoria.getTotal();
@@ -431,6 +434,7 @@ public class Desktop extends javax.swing.JFrame {
         //Classe para inserção de dados
         ProcessosDao processosDao = new ProcessosDao();
         LogDao logDao = new LogDao();
+        LogDiscoDAO logDiscoDao = new LogDiscoDAO();
 
         DecimalFormat saida = new DecimalFormat("0.00");
 
@@ -470,7 +474,7 @@ public class Desktop extends javax.swing.JFrame {
         lblMemoriaDisponivel.setText(Conversor.formatarBytes(memoria.getDisponivel()));
         lblCpu.setText(usoCpu.toString());
 
-        Log log = new Log(1,usoCpu, ConversorDouble.formatarBytes(usoRam), ConversorDouble.formatarBytes(usoDisco), temperaturaGpu);
+        Log log = new Log(1, usoCpu, ConversorDouble.formatarBytes(usoRam), ConversorDouble.formatarBytes(usoDisco), temperaturaGpu);
         logDao.cadastrar(log);
     }
 
