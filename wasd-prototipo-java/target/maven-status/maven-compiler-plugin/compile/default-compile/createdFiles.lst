@@ -11,10 +11,13 @@ br\com\wasd\wasd\prototipo\java\model\DiscoMaquina.class
 br\com\wasd\wasd\prototipo\java\Login.class
 br\com\wasd\wasd\prototipo\java\Login$2.class
 br\com\wasd\wasd\prototipo\java\model\dao\LogDao.class
+enums\TemperaturaAlerta.class
 br\com\wasd\wasd\prototipo\java\Login$5.class
 br\com\wasd\wasd\prototipo\java\model\Log_disco.class
+enums\AppTest.class
 br\com\wasd\wasd\prototipo\java\model\dao\DAO.class
 br\com\wasd\wasd\prototipo\java\model\dao\MaquinaDao.class
+enums\MaquinaTest.class
 br\com\wasd\wasd\prototipo\java\model\Log.class
 br\com\wasd\wasd\prototipo\java\Connection.class
 br\com\wasd\wasd\prototipo\java\mapper\UsuarioMapper.class
