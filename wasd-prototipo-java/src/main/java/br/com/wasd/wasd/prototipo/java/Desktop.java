@@ -51,6 +51,7 @@ public class Desktop extends javax.swing.JFrame {
     private DiscosGroup grupoDeDiscos;
     private Components componentes;
     private Maquina maquina;
+    private ProcessosGroup grupoDeProcessos;
 
     /**
      * Creates new form Dash
@@ -60,6 +61,7 @@ public class Desktop extends javax.swing.JFrame {
     public Desktop() throws UnknownHostException, InterruptedException {
         initComponents();
         looca = new Looca();
+        grupoDeProcessos = looca.getGrupoDeProcessos();
         sistema = looca.getSistema();
         memoria = looca.getMemoria();
         processador = looca.getProcessador();
@@ -69,7 +71,6 @@ public class Desktop extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         getHardware();
         getHardwareUse();
-
         new Timer().scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 try {
@@ -79,6 +80,12 @@ public class Desktop extends javax.swing.JFrame {
                 }
             }
         }, 0, 30000);
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+               getProccess();
+            }
+        }, 0, 60000);
 
     }
 
@@ -438,9 +445,6 @@ public class Desktop extends javax.swing.JFrame {
         //Dados da api looca        
         Looca looca = new Looca();
 
-        ProcessosGroup grupoDeProcessos = looca.getGrupoDeProcessos();
-        List<Processo> processos = grupoDeProcessos.getProcessos();
-
         Processador processador = looca.getProcessador();
         Memoria memoria = looca.getMemoria();
 
@@ -452,13 +456,8 @@ public class Desktop extends javax.swing.JFrame {
         List<Gpu> gpus = componentes.gpus;
 
         //Classe para inserção de dados
-        ProcessosDao processosDao = new ProcessosDao();
         LogDao logDao = new LogDao();
         LogDiscoDAO logDiscoDao = new LogDiscoDAO();
-
-        DecimalFormat saida = new DecimalFormat("0.00");
-
-        DefaultTableModel model = (DefaultTableModel) tbProcessos.getModel();
 
         usoCpu = processador.getUso();
         usoRam = memoria.getEmUso();
@@ -483,17 +482,6 @@ public class Desktop extends javax.swing.JFrame {
             lblDisco.setText(Conversor.formatarBytes(volume.getDisponivel()));
         }
 
-        processos.forEach(processo -> {
-            if(processosDao.findOne(processo.getNome()) != null){
-                processosDao.update(processo);
-            } else {
-                processosDao.insert(processo);
-            }
-
-            Object[] processosAtuais = {processo.getNome(), saida.format(processo.getUsoCpu()), saida.format(processo.getUsoMemoria())};
-            model.addRow(processosAtuais);
-        });
-
         //UPDATE DO STATUS
         String status;
         status = TemperaturaAlerta.fromTemperatura(temperaturaGpu);
@@ -504,6 +492,26 @@ public class Desktop extends javax.swing.JFrame {
 
         Log log = new Log(1, usoCpu, ConversorDouble.formatarBytes(usoRam), ConversorDouble.formatarBytes(usoDisco), temperaturaGpu);
         logDao.insert(log);
+    }
+
+    public void getProccess() {
+        List<Processo> processos = grupoDeProcessos.getProcessos();
+        DecimalFormat saida = new DecimalFormat("0.00");
+        ProcessosDao processosDao = new ProcessosDao();
+
+        DefaultTableModel model = (DefaultTableModel) tbProcessos.getModel();
+
+        processos.forEach(processo -> {
+
+            if (processosDao.findOne(processo.getNome()) != null) {;;
+                processosDao.update(processo);
+            } else {
+                processosDao.insert(processo);
+            }
+
+            Object[] processosAtuais = {processo.getNome(), saida.format(processo.getUsoCpu()), saida.format(processo.getUsoMemoria())};
+            model.addRow(processosAtuais);
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

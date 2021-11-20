@@ -23,8 +23,11 @@ public class ProcessosMapper implements RowMapper<Processos> {
         processo.setProcessos_id(rs.getInt("processo_id"));
         processo.setFk_maquina(rs.getInt("fk_maquina"));
         processo.setNome(rs.getString("nome"));
+        processo.setUsoCpu(rs.getDouble("usoCpu"));
+        processo.setUsoMemoria(rs.getDouble("usoMemoria"));
         processo.setIniciado(rs.getString("iniciado"));    
-        
+        processo.setAtualizado(rs.getString("atualizado"));    
+
         return processo;
     }   
 }

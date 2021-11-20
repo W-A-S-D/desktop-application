@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -36,19 +37,19 @@ public class ProcessosDao implements DAO {
 
     @Override
     public Object findOne(String param) {
-        String sql = "select * from processso where nome = ?";
+        String sql = "select * from processo where nome = ? and fk_maquina = 3";
         try {
             return jdbcTemplate.queryForObject(sql, new Object[]{param}, new ProcessosMapper());
-        } catch (Exception e) {
+        } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
 
     @Override
     public void insert(Object object) {
-        String sql = "insert into processo(fk_maquina, nome) values (3, ?)";
+        String sql = "insert into processo(fk_maquina, nome, usoCpu, usoMemoria) values (3, ?, ?, ?)";
         Processo processo = (Processo) object;
-        jdbcTemplate.update(sql, processo.getNome());
+        jdbcTemplate.update(sql, processo.getNome(), processo.getUsoCpu(), processo.getUsoMemoria());
 
         System.out.println("Processos inserido com sucesso!");
     }
@@ -66,9 +67,9 @@ public class ProcessosDao implements DAO {
             Logger.getLogger(ProcessosDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.sql.Timestamp sqlDate = new java.sql.Timestamp(date.getTime());
-        String sql = "UPDATE processo SET atualizado = ? WHERE nome= ?;";
+        String sql = "UPDATE processo SET usoCpu = ?, usoMemoria = ?, atualizado = ? WHERE nome = ? AND fk_maquina = 3;";
         Processo processo = (Processo) object;
-        jdbcTemplate.update(sql, sqlDate, processo.getNome());
+        jdbcTemplate.update(sql, processo.getUsoCpu(), processo.getUsoMemoria(), sqlDate ,processo.getNome());
 
         System.out.println("Processos atualizado com sucesso!");
     }

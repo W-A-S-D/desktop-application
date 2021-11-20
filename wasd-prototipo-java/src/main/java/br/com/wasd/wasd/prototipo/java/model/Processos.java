@@ -5,8 +5,37 @@ public class Processos {
     private Integer processos_id;
     private Integer fk_maquina;
     private String nome;
+    private Double usoCpu;
+    private Double usoMemoria;
     private String iniciado;
+    private String atualizado;
 
+    
+    public Double getUsoCpu() {
+        return usoCpu;
+    }
+
+    public void setUsoCpu(Double usoCpu) {
+        this.usoCpu = usoCpu;
+    }
+
+    public Double getUsoMemoria() {
+        return usoMemoria;
+    }
+
+    public void setUsoMemoria(Double usoMemoria) {
+        this.usoMemoria = usoMemoria;
+    }
+
+    public String getAtualizado() {
+        return atualizado;
+    }
+
+    public void setAtualizado(String atualizado) {
+        this.atualizado = atualizado;
+    }
+
+    
     public Integer getProcessos_id() {
         return processos_id;
     }
