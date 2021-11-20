@@ -31,7 +31,7 @@ public class LogDao implements DAO {
         String sql = "insert into log(fk_maquina, freq_cpu, uso_ram, temperatura, criado) values (3, ?, ?, ?, ?)";
         Log log = (Log)object;
         jdbcTemplate.update(sql, log.getFreq_cpu(), log.getUso_ram(), log.getTemperatura(), log.getCriado());
-        System.out.println("Inserido com sucesso!");
+        System.out.println("Log inserido com sucesso!");
     }
 
     @Override

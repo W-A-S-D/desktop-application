@@ -36,7 +36,7 @@ public class DiscoDao implements DAO{
         DiscoMaquina disco = (DiscoMaquina)object;
         jdbcTemplate.update(sql, disco.getNome_disco(), disco.getVolume_disco());
 
-        System.out.println("Inserido com sucesso!");
+        System.out.println("Disco inserido com sucesso!");
     }
 
     @Override

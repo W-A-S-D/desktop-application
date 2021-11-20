@@ -5,9 +5,7 @@ public class Processos {
     private Integer processos_id;
     private Integer fk_maquina;
     private String nome;
-    private String status;
     private String iniciado;
-    private String encerrado;
 
     public Integer getProcessos_id() {
         return processos_id;
@@ -33,14 +31,6 @@ public class Processos {
         this.nome = nome;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getIniciado() {
         return iniciado;
     }
@@ -49,12 +39,5 @@ public class Processos {
         this.iniciado = iniciado;
     }
 
-    public String getEncerrado() {
-        return encerrado;
-    }
-
-    public void setEncerrado(String encerrado) {
-        this.encerrado = encerrado;
-    }
 
 }

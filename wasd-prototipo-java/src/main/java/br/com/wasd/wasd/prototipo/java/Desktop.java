@@ -32,8 +32,10 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -55,7 +57,7 @@ public class Desktop extends javax.swing.JFrame {
      *
      * @throws java.net.UnknownHostException
      */
-    public Desktop() throws UnknownHostException {
+    public Desktop() throws UnknownHostException, InterruptedException {
         initComponents();
         looca = new Looca();
         sistema = looca.getSistema();
@@ -67,9 +69,18 @@ public class Desktop extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         getHardware();
         getHardwareUse();
-        
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            public void run() {
+                try {
+                    getHardwareUse();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }, 0, 30000);
+
     }
-  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -373,6 +384,8 @@ public class Desktop extends javax.swing.JFrame {
                     new Desktop().setVisible(true);
                 } catch (UnknownHostException ex) {
                     Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -412,15 +425,13 @@ public class Desktop extends javax.swing.JFrame {
         lblMemoria.setText(Conversor.formatarBytes(ram));
         lblSO.setText(so);
         lblNome.setText(hostname);
-        
 
         maquina = new Maquina(hostname, so, cpu, ConversorDouble.formatarBytes(ram), gpuNome, "pendente");
 
-        
         maquinaDao.insert(maquina);
     }
 
-    public void getHardwareUse() {
+    public void getHardwareUse() throws InterruptedException {
         Long usoRam, usoDisco = 0L;
         Double usoCpu, temperaturaGpu = 0.0;
 
@@ -473,16 +484,20 @@ public class Desktop extends javax.swing.JFrame {
         }
 
         processos.forEach(processo -> {
-            // processosDao.cadastrarProcesso(processo);
+            if(processosDao.findOne(processo.getNome()) != null){
+                processosDao.update(processo);
+            } else {
+                processosDao.insert(processo);
+            }
 
             Object[] processosAtuais = {processo.getNome(), saida.format(processo.getUsoCpu()), saida.format(processo.getUsoMemoria())};
             model.addRow(processosAtuais);
         });
-        
+
         //UPDATE DO STATUS
         String status;
         status = TemperaturaAlerta.fromTemperatura(temperaturaGpu);
-        
+
         lblUsoMemoria.setText(Conversor.formatarBytes(usoRam));
         lblMemoriaDisponivel.setText(Conversor.formatarBytes(memoria.getDisponivel()));
         lblCpu.setText(usoCpu.toString());

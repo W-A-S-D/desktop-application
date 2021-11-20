@@ -37,7 +37,7 @@ public class MaquinaDao implements DAO {
 
        jdbcTemplate.update(sql, maquina.getNome(), maquina.getSo(), maquina.getCpu(), maquina.getRam(), maquina.getGpu());
        /* String sql = "UPDATE maquina SET nome=?, so=?, cpu=?, ram= ?, gpu=? WHERE email=?"; */
-       System.out.println("Inserido com sucesso!");
+       System.out.println("Maquina inserido com sucesso!");
     }
 
     @Override

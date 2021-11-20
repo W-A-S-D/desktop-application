@@ -213,6 +213,8 @@ public class Login extends javax.swing.JFrame {
                 new Desktop().setVisible(true);
             } catch (UnknownHostException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
             this.dispose();
         } else {
