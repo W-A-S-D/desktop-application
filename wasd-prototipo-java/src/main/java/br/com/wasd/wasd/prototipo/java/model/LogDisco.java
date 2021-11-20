@@ -9,12 +9,12 @@ package br.com.wasd.wasd.prototipo.java.model;
  *
  * @author Wesley
  */
-public class Log_disco {
+public class LogDisco {
     private Integer fk_log;
     private Integer fk_disco;
     private Double uso_disco;
 
-    public Log_disco(Integer fk_log, Integer fk_disco, Double uso_disco) {
+    public LogDisco(Integer fk_log, Integer fk_disco, Double uso_disco) {
         this.fk_log = fk_log;
         this.fk_disco = fk_disco;
         this.uso_disco = uso_disco;

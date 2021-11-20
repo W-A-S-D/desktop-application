@@ -3,14 +3,53 @@ package br.com.wasd.wasd.prototipo.java.model;
 public class Maquina {
 
     private Integer maquina_id;
-    private String login;
-    private String senha;
     private String nome;
     private String so;
-    private Double cpu;
+    private String cpu;
     private Double ram;
-    private Double gpu;
+    private String gpu;
     private String status;
+
+    
+    public Maquina(Integer maquina_id, String nome, String so, String cpu, Double ram, String gpu, String status) {
+        this.maquina_id = maquina_id;
+        this.nome = nome;
+        this.so = so;
+        this.cpu = cpu;
+        this.ram = ram;
+        this.gpu = "";
+        this.status = status;
+    }
+
+    public Maquina(Integer maquina_id, String nome, String so, String cpu, Double ram, String status) {
+        this.maquina_id = maquina_id;
+        this.nome = nome;
+        this.so = so;
+        this.cpu = cpu;
+        this.ram = ram;
+        this.status = status;
+    }
+
+    public Maquina(String nome, String so, String cpu, Double ram, String gpu, String status) {
+        this.nome = nome;
+        this.so = so;
+        this.cpu = cpu;
+        this.ram = ram;
+        this.gpu = gpu;
+        this.status = status;
+    }
+
+    public Maquina(String nome, String so, String cpu, Double ram, String status) {
+        this.nome = nome;
+        this.so = so;
+        this.cpu = cpu;
+        this.ram = ram;
+        this.gpu = "";
+        this.status = status;
+    }
+    
+    
+    
     
     public Integer getMaquina_id() {
         return maquina_id;
@@ -18,22 +57,6 @@ public class Maquina {
 
     public void setMaquina_id(Integer maquina_id) {
         this.maquina_id = maquina_id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public String getNome() {
@@ -52,11 +75,11 @@ public class Maquina {
         this.so = so;
     }
 
-    public Double getCpu() {
+    public String getCpu() {
         return cpu;
     }
 
-    public void setCpu(Double cpu) {
+    public void setCpu(String cpu) {
         this.cpu = cpu;
     }
 
@@ -68,11 +91,11 @@ public class Maquina {
         this.ram = ram;
     }
 
-    public Double getGpu() {
+    public String getGpu() {
         return gpu;
     }
 
-    public void setGpu(Double gpu) {
+    public void setGpu(String gpu) {
         this.gpu = gpu;
     }
 

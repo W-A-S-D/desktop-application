@@ -28,4 +28,19 @@ public class UsuarioDAO implements DAO {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    public Object findOne(String param) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void insert(Object object) {
+        
+    }
+
+    @Override
+    public void update(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

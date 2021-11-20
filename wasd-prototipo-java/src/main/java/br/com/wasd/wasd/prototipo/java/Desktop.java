@@ -5,9 +5,11 @@
  */
 package br.com.wasd.wasd.prototipo.java;
 
+import br.com.wasd.wasd.prototipo.java.enums.TemperaturaAlerta;
 import br.com.wasd.wasd.prototipo.java.model.dao.LogDao;
 import br.com.wasd.wasd.prototipo.java.model.DiscoMaquina;
 import br.com.wasd.wasd.prototipo.java.model.Log;
+import br.com.wasd.wasd.prototipo.java.model.Maquina;
 import br.com.wasd.wasd.prototipo.java.model.dao.DiscoDao;
 import br.com.wasd.wasd.prototipo.java.model.dao.LogDiscoDAO;
 import br.com.wasd.wasd.prototipo.java.model.dao.MaquinaDao;
@@ -45,7 +47,8 @@ public class Desktop extends javax.swing.JFrame {
     private Memoria memoria;
     private Processador processador;
     private DiscosGroup grupoDeDiscos;
-    private Components componentes; 
+    private Components componentes;
+    private Maquina maquina;
 
     /**
      * Creates new form Dash
@@ -64,7 +67,9 @@ public class Desktop extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         getHardware();
         getHardwareUse();
+        
     }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -393,7 +398,7 @@ public class Desktop extends javax.swing.JFrame {
 
         for (Disco d : disco) {
             DiscoMaquina discoMaquina = new DiscoMaquina(1, d.getNome(), ConversorDouble.formatarBytes(d.getTamanho()));
-            discoDao.cadastrarDisco(discoMaquina);
+            discoDao.insert(discoMaquina);
         }
 
         if (gpus != null) {
@@ -407,8 +412,12 @@ public class Desktop extends javax.swing.JFrame {
         lblMemoria.setText(Conversor.formatarBytes(ram));
         lblSO.setText(so);
         lblNome.setText(hostname);
+        
 
-        maquinaDao.cadastrar(hostname, so, cpu, ConversorDouble.formatarBytes(ram), gpuNome);
+        maquina = new Maquina(hostname, so, cpu, ConversorDouble.formatarBytes(ram), gpuNome, "pendente");
+
+        
+        maquinaDao.insert(maquina);
     }
 
     public void getHardwareUse() {
@@ -469,13 +478,17 @@ public class Desktop extends javax.swing.JFrame {
             Object[] processosAtuais = {processo.getNome(), saida.format(processo.getUsoCpu()), saida.format(processo.getUsoMemoria())};
             model.addRow(processosAtuais);
         });
-
+        
+        //UPDATE DO STATUS
+        String status;
+        status = TemperaturaAlerta.fromTemperatura(temperaturaGpu);
+        
         lblUsoMemoria.setText(Conversor.formatarBytes(usoRam));
         lblMemoriaDisponivel.setText(Conversor.formatarBytes(memoria.getDisponivel()));
         lblCpu.setText(usoCpu.toString());
 
         Log log = new Log(1, usoCpu, ConversorDouble.formatarBytes(usoRam), ConversorDouble.formatarBytes(usoDisco), temperaturaGpu);
-        logDao.cadastrar(log);
+        logDao.insert(log);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

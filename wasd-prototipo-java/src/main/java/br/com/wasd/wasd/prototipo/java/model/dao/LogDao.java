@@ -15,17 +15,27 @@ public class LogDao implements DAO {
     private Connection config = new Connection();
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(config.getDataSource());
 
-    public void cadastrar(Log log) {
-
-        String sql = "insert into log(fk_maquina, freq_cpu, uso_ram, temperatura, criado) values (3, ?, ?, ?, ?)";
-
-        jdbcTemplate.update(sql, log.getFreq_cpu(), log.getUso_ram(), log.getTemperatura(), log.getCriado());
-
-        System.out.println("Inserido com sucesso!");
-    }
 
     @Override
     public List findAll() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Object findOne(String param) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void insert(Object object) {
+        String sql = "insert into log(fk_maquina, freq_cpu, uso_ram, temperatura, criado) values (3, ?, ?, ?, ?)";
+        Log log = (Log)object;
+        jdbcTemplate.update(sql, log.getFreq_cpu(), log.getUso_ram(), log.getTemperatura(), log.getCriado());
+        System.out.println("Inserido com sucesso!");
+    }
+
+    @Override
+    public void update(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

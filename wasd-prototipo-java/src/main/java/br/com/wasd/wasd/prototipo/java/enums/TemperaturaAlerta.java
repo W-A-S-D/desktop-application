@@ -1,25 +1,26 @@
-package enums;
+package br.com.wasd.wasd.prototipo.java.enums;
 
 public enum TemperaturaAlerta {
 
-    Normal("Normal", 0.0, 44.9),
-    Alerta("Alerta", 45.0, 79.9),
-    Atencao("Atenção", 80.0, Double.MAX_VALUE);
+    NORMAL("Normal", 0.0, 44.9),
+    ALERTA("Alerta", 45.0, 79.9),
+    ATENCAO("Atenção", 80.0, Double.MAX_VALUE);
 
     private String status;
     private Double minimo;
     private Double maximo;
 
+    
     private TemperaturaAlerta(String status, Double minimo, Double maximo) {
         this.status = status;
         this.minimo = minimo;
         this.maximo = maximo;
     }
 
-    public static TemperaturaAlerta fromTemperatura(Double temperatura) {
+    public static String fromTemperatura(Double temperatura){
         for (TemperaturaAlerta statusTemp : values()) {
-            if (temperatura < statusTemp.maximo && temperatura >= statusTemp.minimo) {
-                return statusTemp;
+            if(temperatura < statusTemp.maximo && temperatura >= statusTemp.minimo){
+                return statusTemp.getStatus();
             }
         }
         return null;

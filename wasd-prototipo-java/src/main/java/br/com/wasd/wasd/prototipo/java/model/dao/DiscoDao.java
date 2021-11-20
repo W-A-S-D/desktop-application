@@ -20,17 +20,27 @@ public class DiscoDao implements DAO{
     private Connection config = new Connection();
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(config.getDataSource());
 
-    public void cadastrarDisco(DiscoMaquina disco) {
+    @Override
+    public List findAll() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
+    @Override
+    public Object findOne(String param) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void insert(Object object) {
         String sql = "insert into disco(fk_maquina, nome, volume) values (3, ?, ?)";
-
+        DiscoMaquina disco = (DiscoMaquina)object;
         jdbcTemplate.update(sql, disco.getNome_disco(), disco.getVolume_disco());
 
         System.out.println("Inserido com sucesso!");
     }
 
     @Override
-    public List findAll() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void update(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
