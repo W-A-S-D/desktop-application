@@ -5,16 +5,10 @@
  */
 package br.com.wasd.wasd.prototipo.java.model.dao;
 
-import br.com.wasd.wasd.prototipo.java.Connection;
 import br.com.wasd.wasd.prototipo.java.model.Log;
 import java.util.List;
-import org.springframework.jdbc.core.JdbcTemplate;
 
-public class LogDao implements DAO {
-
-    private Connection config = new Connection();
-    private JdbcTemplate jdbcTemplate = new JdbcTemplate(config.getDataSource());
-
+public class LogDao extends DAOConnection implements DAO {
 
     @Override
     public List findAll() {

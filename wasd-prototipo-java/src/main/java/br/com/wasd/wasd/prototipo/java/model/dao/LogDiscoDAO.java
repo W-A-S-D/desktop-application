@@ -1,17 +1,10 @@
 package br.com.wasd.wasd.prototipo.java.model.dao;
 
-import br.com.wasd.wasd.prototipo.java.Connection;
 import br.com.wasd.wasd.prototipo.java.model.LogDisco;
-import com.github.britooo.looca.api.core.Looca;
 import java.util.List;
-import org.springframework.jdbc.core.JdbcTemplate;
 
-public class LogDiscoDAO implements DAO {
+public class LogDiscoDAO extends DAOConnection implements DAO {
 
-    private Connection config = new Connection();
-    private JdbcTemplate jdbcTemplate = new JdbcTemplate(config.getDataSource());
-    Looca looca = new Looca();
-    DiscoDao disco = new DiscoDao();
 
     @Override
     public List findAll() {

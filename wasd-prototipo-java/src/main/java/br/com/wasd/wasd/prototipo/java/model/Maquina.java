@@ -3,6 +3,7 @@ package br.com.wasd.wasd.prototipo.java.model;
 public class Maquina {
 
     private Integer maquina_id;
+    private Integer fk_setor;
     private String nome;
     private String so;
     private String cpu;
@@ -10,7 +11,8 @@ public class Maquina {
     private String gpu;
     private String status;
 
-    
+    public Maquina(){}
+        
     public Maquina(Integer maquina_id, String nome, String so, String cpu, Double ram, String gpu, String status) {
         this.maquina_id = maquina_id;
         this.nome = nome;
@@ -21,6 +23,7 @@ public class Maquina {
         this.status = status;
     }
 
+  
     public Maquina(Integer maquina_id, String nome, String so, String cpu, Double ram, String status) {
         this.maquina_id = maquina_id;
         this.nome = nome;
@@ -106,5 +109,14 @@ public class Maquina {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public Integer getFk_setor() {
+        return fk_setor;
+    }
+
+    public void setFk_setor(Integer fk_setor) {
+        this.fk_setor = fk_setor;
+    }
+
 
 }

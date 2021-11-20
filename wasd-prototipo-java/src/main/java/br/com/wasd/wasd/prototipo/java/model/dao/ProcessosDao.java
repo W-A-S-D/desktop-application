@@ -25,10 +25,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  *
  * @author bianc
  */
-public class ProcessosDao implements DAO {
-
-    private Connection config = new Connection();
-    private JdbcTemplate jdbcTemplate = new JdbcTemplate(config.getDataSource());
+public class ProcessosDao extends DAOConnection implements DAO {
 
     @Override
     public List findAll() {

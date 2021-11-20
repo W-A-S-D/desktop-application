@@ -5,20 +5,17 @@
  */
 package br.com.wasd.wasd.prototipo.java.model.dao;
 
-import br.com.wasd.wasd.prototipo.java.Connection;
 import br.com.wasd.wasd.prototipo.java.model.Maquina;
 import java.util.List;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.dao.EmptyResultDataAccessException;
+import br.com.wasd.wasd.prototipo.java.mapper.MaquinaMapper;
 
 /**
  *
  * @author bianc
  */
-public class MaquinaDao implements DAO {
+public class MaquinaDao extends DAOConnection implements DAO {
     
-    private Connection config = new Connection();
-    private JdbcTemplate jdbcTemplate = new JdbcTemplate(config.getDataSource());
-
     @Override
     public List findAll() {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -26,7 +23,12 @@ public class MaquinaDao implements DAO {
 
     @Override
     public Object findOne(String param) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          String sql = "select * from maquina where nome = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, new Object[]{param}, new MaquinaMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override

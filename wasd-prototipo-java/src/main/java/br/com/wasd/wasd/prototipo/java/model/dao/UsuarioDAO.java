@@ -7,10 +7,8 @@ import br.com.wasd.wasd.prototipo.java.mapper.UsuarioMapper;
 import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 
-public class UsuarioDAO implements DAO {
+public class UsuarioDAO extends DAOConnection implements DAO {
 
-    private Connection config = new Connection();
-    private JdbcTemplate jdbcTemplate = new JdbcTemplate(config.getDataSource());
 
     public Usuario login(String email, String senha) {
 
