@@ -32,7 +32,7 @@ public class PedidoDao extends DAOConnection implements DAO {
         String sql = "insert into pedido(hostname, status, fk_usuario) values ( ?, ?, ?)";
         Pedido pedido = (Pedido) object;
 
-        jdbcTemplate.update(sql, pedido.getHostname(), pedido.getStatus(), pedido.getFk_usuario());
+        jdbcTemplate.update(sql, pedido.getHostname(), 0 , pedido.getFk_usuario());
 
         System.out.println("pedido inserido com sucesso");
     }

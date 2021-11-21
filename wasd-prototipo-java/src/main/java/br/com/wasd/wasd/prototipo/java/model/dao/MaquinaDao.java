@@ -34,11 +34,11 @@ public class MaquinaDao extends DAOConnection implements DAO {
     @Override
     public void insert(Object object) {
        String sql = "insert into maquina(fk_setor, nome, so, cpu, ram, gpu, status) "
-                + "values (2, ?, ?, ?, ?, ?, 'Ok')";
+                + "values (?, ?, ?, ?, ?, ?, ?)";
        Maquina maquina = (Maquina)object;
 
-       jdbcTemplate.update(sql, maquina.getNome(), maquina.getSo(), maquina.getCpu(), maquina.getRam(), maquina.getGpu());
-       /* String sql = "UPDATE maquina SET nome=?, so=?, cpu=?, ram= ?, gpu=? WHERE email=?"; */
+       jdbcTemplate.update(sql, maquina.getFk_setor() ,maquina.getNome(), maquina.getSo(), maquina.getCpu(), maquina.getRam(), maquina.getGpu(), maquina.getStatus());
+
        System.out.println("Maquina inserido com sucesso!");
     }
 
