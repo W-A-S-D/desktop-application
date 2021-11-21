@@ -25,9 +25,9 @@ public class DiscoDao extends DAOConnection implements DAO{
 
     @Override
     public void insert(Object object) {
-        String sql = "insert into disco(fk_maquina, nome, volume) values (3, ?, ?)";
+        String sql = "insert into disco(fk_maquina, nome, volume) values (?, ?, ?)";
         DiscoMaquina disco = (DiscoMaquina)object;
-        jdbcTemplate.update(sql, disco.getNome_disco(), disco.getVolume_disco());
+        jdbcTemplate.update(sql, disco.getMaquina_id() ,disco.getNome_disco(), disco.getVolume_disco());
 
         System.out.println("Disco inserido com sucesso!");
     }
@@ -35,5 +35,11 @@ public class DiscoDao extends DAOConnection implements DAO{
     @Override
     public void update(Object object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List findAllBy(String param) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

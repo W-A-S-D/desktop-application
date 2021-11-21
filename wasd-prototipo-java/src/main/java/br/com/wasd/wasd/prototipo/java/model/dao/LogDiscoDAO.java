@@ -18,7 +18,7 @@ public class LogDiscoDAO extends DAOConnection implements DAO {
 
     @Override
     public void insert(Object object) {
-        String sql = "insert into log(fk_log, fk_disco, uso_disco) values (?, ?, ?)";
+        String sql = "insert into log_disco(fk_log, fk_disco, uso_disco) values (?, ?, ?)";
         LogDisco log = (LogDisco)object;
         jdbcTemplate.update(sql, log.getFk_log(), log.getFk_disco(), log.getUso_disco());
     }
@@ -26,6 +26,12 @@ public class LogDiscoDAO extends DAOConnection implements DAO {
     @Override
     public void update(Object object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List findAllBy(String param) {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }

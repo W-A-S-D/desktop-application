@@ -6,8 +6,16 @@
 package br.com.wasd.wasd.prototipo.java.model.dao;
 
 import br.com.wasd.wasd.prototipo.java.model.Maquina;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+
 import br.com.wasd.wasd.prototipo.java.mapper.MaquinaMapper;
 
 /**
@@ -42,8 +50,44 @@ public class MaquinaDao extends DAOConnection implements DAO {
        System.out.println("Maquina inserido com sucesso!");
     }
 
+    public int keyInsert(Object object) {
+        String sql = "insert into maquina(fk_setor, nome, so, cpu, ram, gpu, status) "
+        + "values (?, ?, ?, ?, ?, ?, ?)";
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        Maquina maquina = (Maquina) object;
+        try {
+            jdbcTemplate.update(new PreparedStatementCreator() {
+                @Override
+                public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+                    PreparedStatement insertLog = con.prepareStatement(sql, new String[]{"maquina_id"});
+                    insertLog.setInt(1, maquina.getFk_setor());
+                    insertLog.setString(2, maquina.getNome());
+                    insertLog.setString(3, maquina.getSo());
+                    insertLog.setString(4, maquina.getCpu());
+                    insertLog.setDouble(5, maquina.getRam());
+                    insertLog.setString(6, maquina.getCpu());
+                    insertLog.setString(7, maquina.getStatus());
+    
+                    return insertLog;
+                }
+            }, keyHolder);
+    
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        System.out.println("Maquina inserido com sucesso!");
+        return keyHolder.getKey().intValue();
+    }
+
     @Override
     public void update(Object object) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List findAllBy(String param) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

@@ -1,9 +1,11 @@
 br\com\wasd\wasd\prototipo\java\model\dao\UsuarioDAO.class
 br\com\wasd\wasd\prototipo\java\model\dao\PedidoDao.class
+br\com\wasd\wasd\prototipo\java\model\Setor.class
 br\com\wasd\wasd\prototipo\java\model\Usuario.class
 br\com\wasd\wasd\prototipo\java\ConversorDouble.class
 br\com\wasd\wasd\prototipo\java\model\dao\DiscoDao.class
 br\com\wasd\wasd\prototipo\java\model\Maquina.class
+br\com\wasd\wasd\prototipo\java\model\dao\SetorDAO.class
 br\com\wasd\wasd\prototipo\java\Desktop$1.class
 br\com\wasd\wasd\prototipo\java\Desktop.class
 br\com\wasd\wasd\prototipo\java\mapper\DiscoMapper.class
@@ -15,12 +17,14 @@ br\com\wasd\wasd\prototipo\java\Login$2.class
 br\com\wasd\wasd\prototipo\java\model\Pedido.class
 br\com\wasd\wasd\prototipo\java\enums\TemperaturaAlerta.class
 br\com\wasd\wasd\prototipo\java\model\dao\LogDao.class
+br\com\wasd\wasd\prototipo\java\model\dao\MaquinaDao$1.class
 br\com\wasd\wasd\prototipo\java\mapper\MaquinaMapper.class
 br\com\wasd\wasd\prototipo\java\Login$5.class
 br\com\wasd\wasd\prototipo\java\model\dao\DAO.class
 br\com\wasd\wasd\prototipo\java\model\dao\MaquinaDao.class
 br\com\wasd\wasd\prototipo\java\model\Log.class
 br\com\wasd\wasd\prototipo\java\mapper\PedidoMapper.class
+br\com\wasd\wasd\prototipo\java\mapper\SetorMapper.class
 br\com\wasd\wasd\prototipo\java\Connection.class
 br\com\wasd\wasd\prototipo\java\model\LogDisco.class
 br\com\wasd\wasd\prototipo\java\mapper\UsuarioMapper.class
@@ -28,6 +32,7 @@ br\com\wasd\wasd\prototipo\java\Desktop$2.class
 br\com\wasd\wasd\prototipo\java\mapper\ProcessosMapper.class
 br\com\wasd\wasd\prototipo\java\model\dao\DAOConnection.class
 br\com\wasd\wasd\prototipo\java\model\dao\LogDiscoDAO.class
+br\com\wasd\wasd\prototipo\java\model\dao\LogDao$1.class
 br\com\wasd\wasd\prototipo\java\model\dao\ProcessosDao.class
 br\com\wasd\wasd\prototipo\java\Login$4.class
 br\com\wasd\wasd\prototipo\java\model\Processos.class

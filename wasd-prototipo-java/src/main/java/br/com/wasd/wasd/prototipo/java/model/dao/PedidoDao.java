@@ -46,4 +46,10 @@ public class PedidoDao extends DAOConnection implements DAO {
         System.out.println("pedido atualizado com sucesso!");
     }
 
+    @Override
+    public List findAllBy(String param) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

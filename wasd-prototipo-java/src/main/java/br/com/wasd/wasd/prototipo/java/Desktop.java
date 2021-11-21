@@ -11,10 +11,13 @@ import br.com.wasd.wasd.prototipo.java.model.DiscoMaquina;
 import br.com.wasd.wasd.prototipo.java.model.Log;
 import br.com.wasd.wasd.prototipo.java.model.LogDisco;
 import br.com.wasd.wasd.prototipo.java.model.Maquina;
+import br.com.wasd.wasd.prototipo.java.model.Setor;
 import br.com.wasd.wasd.prototipo.java.model.dao.DiscoDao;
 import br.com.wasd.wasd.prototipo.java.model.dao.LogDiscoDAO;
 import br.com.wasd.wasd.prototipo.java.model.dao.MaquinaDao;
 import br.com.wasd.wasd.prototipo.java.model.dao.ProcessosDao;
+import br.com.wasd.wasd.prototipo.java.model.dao.SetorDAO;
+
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.discos.Disco;
 import com.github.britooo.looca.api.group.discos.DiscosGroup;
@@ -67,7 +70,7 @@ public class Desktop extends javax.swing.JFrame {
 
     }
 
-    public Desktop(Integer idUser) throws UnknownHostException, InterruptedException {
+    public Desktop(Integer idUser) throws UnknownHostException, InterruptedException {      
         initComponents();
         looca = new Looca();
         grupoDeProcessos = looca.getGrupoDeProcessos();
@@ -76,10 +79,10 @@ public class Desktop extends javax.swing.JFrame {
         processador = looca.getProcessador();
         grupoDeDiscos = looca.getGrupoDeDiscos();
         componentes = JSensors.get.components();
-        idUser = this.idUser;
         hostname = InetAddress.getLocalHost().getHostName();
         maquinaDao = new MaquinaDao();
         maquina = (Maquina) maquinaDao.findOne(hostname);
+        this.idUser = idUser;
 
         this.setLocationRelativeTo(null);
         getHardware();
@@ -398,15 +401,26 @@ public class Desktop extends javax.swing.JFrame {
         lblNome.setText(hostname);
 
         if (maquina == null) {
-            for (Disco d : disco) {
-                DiscoMaquina discoMaquina = new DiscoMaquina(1, d.getNome(),
-                        ConversorDouble.formatarBytes(d.getTamanho()));
-                discoDao.insert(discoMaquina);
+            SetorDAO setorDao = new SetorDAO();
+            Setor setor;
+
+            setor = (Setor) setorDao.findOne(idUser);
+
+            if (setor != null) {
+                maquina = new Maquina(setor.getSetor_id(), hostname, so, cpu, ConversorDouble.formatarBytes(ram),
+                        gpuNome, "pendente");
+                Integer insertedMachine = maquinaDao.keyInsert(maquina);
+
+                for (Disco d : disco) {
+                    DiscoMaquina discoMaquina = new DiscoMaquina(insertedMachine, d.getNome(),
+                            ConversorDouble.formatarBytes(d.getTamanho()));
+                    discoDao.insert(discoMaquina);
+                }
+            } else {
+                // log
+                System.out.println("Setor não encontrado para inserir maquina!");
             }
 
-            maquina = new Maquina(2, hostname, so, cpu, ConversorDouble.formatarBytes(ram), gpuNome, "pendente");
-
-            maquinaDao.insert(maquina);
         }
     }
 
@@ -442,10 +456,6 @@ public class Desktop extends javax.swing.JFrame {
         for (Volume volume : discoVolume) {
             usoDisco = volume.getDisponivel();
             lblDisco.setText(Conversor.formatarBytes(volume.getDisponivel()));
-            
-            LogDisco logDisco;
-            logDisco = new LogDisco(1, 1, ConversorDouble.formatarBytes(volume.getDisponivel()));
-            logDiscoDao.insert(logDisco);
         }
 
         // UPDATE DO STATUS
@@ -459,9 +469,19 @@ public class Desktop extends javax.swing.JFrame {
         if (maquina != null) {
             Log log = new Log(maquina.getMaquina_id(), usoCpu, ConversorDouble.formatarBytes(usoRam),
                     ConversorDouble.formatarBytes(usoDisco), temperaturaGpu);
-            logDao.insert(log);
+            Integer insertedLog = logDao.keyInsert(log);
+            System.out.println("log id: "+ insertedLog);
+            for (Volume volume : discoVolume) {
+                usoDisco = volume.getDisponivel();
+                lblDisco.setText(Conversor.formatarBytes(volume.getDisponivel()));
+
+                LogDisco logDisco;
+                logDisco = new LogDisco(insertedLog, 1, ConversorDouble.formatarBytes(volume.getDisponivel()));
+                logDiscoDao.insert(logDisco);
+            }
+
         } else {
-            //log 
+            // log
         }
     }
 
@@ -475,8 +495,6 @@ public class Desktop extends javax.swing.JFrame {
         processos.forEach(processo -> {
 
             if (processosDao.findOne(processo.getNome()) != null) {
-                ;
-                ;
                 processosDao.update(processo);
             } else {
                 processosDao.insert(processo);
