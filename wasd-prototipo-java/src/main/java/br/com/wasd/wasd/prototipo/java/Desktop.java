@@ -471,14 +471,15 @@ public class Desktop extends javax.swing.JFrame {
                     ConversorDouble.formatarBytes(usoDisco), temperaturaGpu);
             Integer insertedLog = logDao.keyInsert(log);
             System.out.println("log id: "+ insertedLog);
-            for (Volume volume : discoVolume) {
-                usoDisco = volume.getDisponivel();
-                lblDisco.setText(Conversor.formatarBytes(volume.getDisponivel()));
 
-                LogDisco logDisco;
-                logDisco = new LogDisco(insertedLog, 1, ConversorDouble.formatarBytes(volume.getDisponivel()));
-                logDiscoDao.insert(logDisco);
-            }
+            // for (Volume volume : discoVolume) {
+            //     usoDisco = volume.getDisponivel();
+            //     lblDisco.setText(Conversor.formatarBytes(volume.getDisponivel()));
+
+            //     LogDisco logDisco;
+            //     logDisco = new LogDisco(insertedLog, 1, ConversorDouble.formatarBytes(volume.getDisponivel()));
+            //     logDiscoDao.insert(logDisco);
+            // }
 
         } else {
             // log
