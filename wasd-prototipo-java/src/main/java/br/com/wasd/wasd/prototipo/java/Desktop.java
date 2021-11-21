@@ -9,6 +9,7 @@ import br.com.wasd.wasd.prototipo.java.enums.TemperaturaAlerta;
 import br.com.wasd.wasd.prototipo.java.model.dao.LogDao;
 import br.com.wasd.wasd.prototipo.java.model.DiscoMaquina;
 import br.com.wasd.wasd.prototipo.java.model.Log;
+import br.com.wasd.wasd.prototipo.java.model.LogDisco;
 import br.com.wasd.wasd.prototipo.java.model.Maquina;
 import br.com.wasd.wasd.prototipo.java.model.dao.DiscoDao;
 import br.com.wasd.wasd.prototipo.java.model.dao.LogDiscoDAO;
@@ -380,8 +381,6 @@ public class Desktop extends javax.swing.JFrame {
         String so, cpu, gpuNome = "Sem GPU no sistema";
         Long ram = 0L;
 
-        // Dados da GPU - Jsensors
-
         so = sistema.getSistemaOperacional();
         cpu = processador.getNome();
         ram = memoria.getTotal();
@@ -415,17 +414,7 @@ public class Desktop extends javax.swing.JFrame {
         Long usoRam, usoDisco = 0L;
         Double usoCpu, temperaturaGpu = 0.0;
 
-        // Dados da api looca
-        Looca looca = new Looca();
-
-        Processador processador = looca.getProcessador();
-        Memoria memoria = looca.getMemoria();
-
-        DiscosGroup grupoDeDiscos = looca.getGrupoDeDiscos();
         List<Volume> discoVolume = grupoDeDiscos.getVolumes();
-
-        // Dados da GPU - Jsensors
-        Components componentes = JSensors.get.components();
         List<Gpu> gpus = componentes.gpus;
 
         // Classe para inserção de dados
@@ -453,6 +442,10 @@ public class Desktop extends javax.swing.JFrame {
         for (Volume volume : discoVolume) {
             usoDisco = volume.getDisponivel();
             lblDisco.setText(Conversor.formatarBytes(volume.getDisponivel()));
+            
+            LogDisco logDisco;
+            logDisco = new LogDisco(1, 1, ConversorDouble.formatarBytes(volume.getDisponivel()));
+            logDiscoDao.insert(logDisco);
         }
 
         // UPDATE DO STATUS
