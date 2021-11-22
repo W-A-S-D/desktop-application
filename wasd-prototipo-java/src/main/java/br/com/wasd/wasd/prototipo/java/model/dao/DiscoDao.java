@@ -18,6 +18,7 @@ public class DiscoDao extends DAOConnection implements DAO{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+
     @Override
     public Object findOne(String param) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -40,6 +41,12 @@ public class DiscoDao extends DAOConnection implements DAO{
     @Override
     public List findAllBy(String param) {
         // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    public List findAllBy(int param){
+        
         return null;
     }
 }

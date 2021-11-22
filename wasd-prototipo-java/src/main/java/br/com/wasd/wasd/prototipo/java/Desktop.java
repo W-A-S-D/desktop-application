@@ -410,6 +410,7 @@ public class Desktop extends javax.swing.JFrame {
                 maquina = new Maquina(setor.getSetor_id(), hostname, so, cpu, ConversorDouble.formatarBytes(ram),
                         gpuNome, "pendente");
                 Integer insertedMachine = maquinaDao.keyInsert(maquina);
+                maquina.setMaquina_id(insertedMachine);
 
                 for (Disco d : disco) {
                     DiscoMaquina discoMaquina = new DiscoMaquina(insertedMachine, d.getNome(),
