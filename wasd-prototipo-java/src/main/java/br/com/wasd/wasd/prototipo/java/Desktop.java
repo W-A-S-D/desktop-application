@@ -70,7 +70,7 @@ public class Desktop extends javax.swing.JFrame {
 
     }
 
-    public Desktop(Integer idUser) throws UnknownHostException, InterruptedException {      
+    public Desktop(Integer idUser) throws UnknownHostException, InterruptedException {
         initComponents();
         looca = new Looca();
         grupoDeProcessos = looca.getGrupoDeProcessos();
@@ -471,16 +471,21 @@ public class Desktop extends javax.swing.JFrame {
             Log log = new Log(maquina.getMaquina_id(), usoCpu, ConversorDouble.formatarBytes(usoRam),
                     ConversorDouble.formatarBytes(usoDisco), temperaturaGpu);
             Integer insertedLog = logDao.keyInsert(log);
-            System.out.println("log id: "+ insertedLog);
+            System.out.println("log id: " + insertedLog);
 
-            // for (Volume volume : discoVolume) {
-            //     usoDisco = volume.getDisponivel();
-            //     lblDisco.setText(Conversor.formatarBytes(volume.getDisponivel()));
+            DiscoDao discoDao = new DiscoDao();
 
-            //     LogDisco logDisco;
-            //     logDisco = new LogDisco(insertedLog, 1, ConversorDouble.formatarBytes(volume.getDisponivel()));
-            //     logDiscoDao.insert(logDisco);
-            // }
+            List<DiscoMaquina> discos = discoDao.findAllBy(maquina.getMaquina_id());
+
+            if (discos != null) {
+                for (int i = 0; i < discos.size(); i++) {
+                    usoDisco = discoVolume.get(i).getDisponivel();
+                    lblDisco.setText(Conversor.formatarBytes(discoVolume.get(i).getDisponivel()));
+
+                    LogDisco logDisco = new LogDisco(insertedLog, discos.get(i).getDisco_id(),ConversorDouble.formatarBytes(discoVolume.get(i).getDisponivel()));
+                    logDiscoDao.insert(logDisco);
+                }
+            }
 
         } else {
             // log
