@@ -40,7 +40,6 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-
     private Looca looca;
     private Sistema sistema;
     private Memoria memoria;
@@ -226,12 +225,15 @@ public class Login extends javax.swing.JFrame {
         Pedido pedido;
         UsuarioDAO dao = new UsuarioDAO();
         MaquinaDao maquinaDao = new MaquinaDao();
+        LoadingScreen load = new LoadingScreen();
 
         usuario = dao.login(login, senha);
         pedido = (Pedido) pedidoDao.findOne(hostname);
 
         if (usuario != null) {
+            load.load(true);
             if (pedido == null) {
+                load.load(false);
                 int dialogButton = JOptionPane.YES_NO_OPTION;
                 int dialogResult = JOptionPane.showConfirmDialog(null,
                         "Essa máquina não existe em nosso banco de dados, deseja solicitar o cadastro?",
@@ -248,12 +250,14 @@ public class Login extends javax.swing.JFrame {
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                this.dispose();
+
             } else {
+                load.load(false);
                 JOptionPane.showMessageDialog(null,
                         "O cadastro dessa máquina foi NEGADO!. Para mais informações informe-se em: https://wasdenterprise.atlassian.net/servicedesk/customer/user/login?destination=portals");
             }
         } else {
+            load.load(false);
             JOptionPane.showMessageDialog(null, "Senha/Usuário incorreto");
         }
     }// GEN-LAST:event_btnEntrarActionPerformed
@@ -262,8 +266,6 @@ public class Login extends javax.swing.JFrame {
         PedidoDao pedidoDao = new PedidoDao();
         pedidoDao.insert(new Pedido(hostname, userId));
     }
-
- 
 
     /**
      * @param args the command line arguments
