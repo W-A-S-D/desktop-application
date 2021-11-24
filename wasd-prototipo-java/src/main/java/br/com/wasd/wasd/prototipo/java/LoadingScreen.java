@@ -112,8 +112,6 @@ public class LoadingScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public void load(Boolean visivel) {
-        new Thread(new Runnable() {
-            public void run() {
                 //Do whatever
 
                 LoadingScreen sp = new LoadingScreen();
@@ -151,9 +149,7 @@ public class LoadingScreen extends javax.swing.JFrame {
                     sp.setVisible(visivel);
                 }
             }
-        }
-        ).start();
-    }
+        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackgroundColor;

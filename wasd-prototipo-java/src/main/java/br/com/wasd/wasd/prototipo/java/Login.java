@@ -229,50 +229,62 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEntrarActionPerformed
-        String login, senha;
-
-        login = txtUser.getText();
-        senha = String.valueOf(txtSenha.getPassword());
-        System.out.println(senha);
-
-        Usuario usuario;
-        Pedido pedido;
-        UsuarioDAO dao = new UsuarioDAO();
-        MaquinaDao maquinaDao = new MaquinaDao();
         LoadingScreen load = new LoadingScreen();
+        new Thread(new Runnable() {
+            public void run() {
 
-        usuario = dao.login(login, senha);
-        pedido = (Pedido) pedidoDao.findOne(hostname);
-        load.load(true);
-        if (usuario != null) {
-            if (pedido == null) {
-                load.load(false);
-                int dialogButton = JOptionPane.YES_NO_OPTION;
-                int dialogResult = JOptionPane.showConfirmDialog(null,
-                        "Essa máquina não existe em nosso banco de dados, deseja solicitar o cadastro?",
-                        "Solicitação de cadastro", dialogButton);
-                if (dialogResult == 0) {
-                    createRequest(usuario.getUsuario_id());
-                    JOptionPane.showMessageDialog(null, "Solicitação cadastrada, aguarde aprovação.");
-                }
-            } else if (pedido.getStatus() == 1) {
-                try {
-                    new Desktop(usuario.getUsuario_id()).setVisible(true);
-                } catch (UnknownHostException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            } else {
-                load.load(false);
-                JOptionPane.showMessageDialog(null,
-                        "O cadastro dessa máquina foi NEGADO!. Para mais informações informe-se em: https://wasdenterprise.atlassian.net/servicedesk/customer/user/login?destination=portals");
+                load.load(true);
             }
-        } else {
-            load.load(false);
-            JOptionPane.showMessageDialog(null, "Senha/Usuário incorreto");
-        }
+
+        }).start();
+        new Thread(new Runnable() {
+            public void run() {
+
+                String login, senha;
+
+                login = txtUser.getText();
+                senha = String.valueOf(txtSenha.getPassword());
+                System.out.println(senha);
+
+                Usuario usuario;
+                Pedido pedido;
+                UsuarioDAO dao = new UsuarioDAO();
+                MaquinaDao maquinaDao = new MaquinaDao();
+
+                usuario = dao.login(login, senha);
+                pedido = (Pedido) pedidoDao.findOne(hostname);
+                if (usuario != null) {
+                    if (pedido == null) {
+                        load.load(false);
+                        int dialogButton = JOptionPane.YES_NO_OPTION;
+                        int dialogResult = JOptionPane.showConfirmDialog(null,
+                                "Essa máquina não existe em nosso banco de dados, deseja solicitar o cadastro?",
+                                "Solicitação de cadastro", dialogButton);
+                        if (dialogResult == 0) {
+                            createRequest(usuario.getUsuario_id());
+                            JOptionPane.showMessageDialog(null, "Solicitação cadastrada, aguarde aprovação.");
+                        }
+                    } else if (pedido.getStatus() == 1) {
+                        try {
+                            new Desktop(usuario.getUsuario_id()).setVisible(true);
+                        } catch (UnknownHostException ex) {
+                            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    } else {
+                        load.load(false);
+                        JOptionPane.showMessageDialog(null,
+                                "O cadastro dessa máquina foi NEGADO!. Para mais informações informe-se em: https://wasdenterprise.atlassian.net/servicedesk/customer/user/login?destination=portals");
+                    }
+                } else {
+                    load.load(false);
+                    JOptionPane.showMessageDialog(null, "Senha/Usuário incorreto");
+                }
+            }
+
+        }).start();
     }// GEN-LAST:event_btnEntrarActionPerformed
 
     public void createRequest(Integer userId) {
