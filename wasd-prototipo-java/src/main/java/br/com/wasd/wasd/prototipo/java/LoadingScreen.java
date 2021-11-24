@@ -61,7 +61,7 @@ public class LoadingScreen extends javax.swing.JFrame {
             public javax.swing.Icon getIcon() {
                 try {
                     return new javax.swing.ImageIcon(
-                        new java.net.URL("http://192.168.15.100/projetoPi/Load.gif")
+                        new java.net.URL("http://minharede.ddns.net:85/projetoPi/Load.gif")
                     );
                 } catch (java.net.MalformedURLException e) {
                 }
