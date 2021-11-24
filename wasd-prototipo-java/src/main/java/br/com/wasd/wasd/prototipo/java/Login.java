@@ -243,9 +243,10 @@ public class Login extends javax.swing.JFrame {
 
         usuario = dao.login(login, senha);
         pedido = (Pedido) pedidoDao.findOne(hostname);
-
-        if (usuario != null) {            
+        load.load(true);
+        if (usuario != null) {
             if (pedido == null) {
+                load.load(false);
                 int dialogButton = JOptionPane.YES_NO_OPTION;
                 int dialogResult = JOptionPane.showConfirmDialog(null,
                         "Essa máquina não existe em nosso banco de dados, deseja solicitar o cadastro?",
