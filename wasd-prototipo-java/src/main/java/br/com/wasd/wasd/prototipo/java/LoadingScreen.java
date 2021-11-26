@@ -151,6 +151,7 @@ public class LoadingScreen extends javax.swing.JFrame {
                 }
                 if (i == 99) {
                     dispose();
+                    sp.setVisible(false);
                     break;
                 }
                 if (LoadingVar == false) {
