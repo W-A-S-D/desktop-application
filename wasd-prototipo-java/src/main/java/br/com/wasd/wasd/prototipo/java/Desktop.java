@@ -359,10 +359,6 @@ public class Desktop extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Desktop.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        LoadingScreen load = new LoadingScreen();
-        load.setLoadingVar(false);
-        load.setVisible(false);
-        load.dispose();
         // </editor-fold>
         // </editor-fold>
 
