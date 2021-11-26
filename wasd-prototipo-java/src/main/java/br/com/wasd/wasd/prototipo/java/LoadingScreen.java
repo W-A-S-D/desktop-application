@@ -147,7 +147,7 @@ public class LoadingScreen extends javax.swing.JFrame {
                 }
                 if (i == 85) {
                     sp.LoadingLabel.setText("Iniciando Aplicação...");
-                    j = 150;
+                    j = 100;
                 }
                 if (LoadingVar == false) {
                     this.dispose();
@@ -156,6 +156,7 @@ public class LoadingScreen extends javax.swing.JFrame {
                 }
                 sp.LoadingBar.setValue(i);
             }
+            this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
