@@ -265,6 +265,9 @@ public class Login extends javax.swing.JFrame {
                     } else if (pedido.getStatus() == 1) {
                         try {
                             new Desktop(usuario.getUsuario_id()).setVisible(true);
+                            load.setLoadingVar(false);
+                            load.dispose();
+                            dispose();
                         } catch (UnknownHostException ex) {
                             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                         } catch (InterruptedException ex) {
