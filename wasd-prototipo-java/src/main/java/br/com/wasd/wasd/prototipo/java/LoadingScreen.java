@@ -139,7 +139,7 @@ public class LoadingScreen extends javax.swing.JFrame {
                 }
                 if (i == 50) {
                     sp.LoadingLabel.setText("Conectando com o Banco de Dados...");
-                    j = 50;
+                    j = 200;
                 }
                 if (i == 70) {
                     sp.LoadingLabel.setText("Carregando Interface...");
@@ -147,7 +147,7 @@ public class LoadingScreen extends javax.swing.JFrame {
                 }
                 if (i == 85) {
                     sp.LoadingLabel.setText("Iniciando Aplicação...");
-                    j = 100;
+                    j = 150;
                 }
                 if (LoadingVar == false) {
                     this.dispose();
