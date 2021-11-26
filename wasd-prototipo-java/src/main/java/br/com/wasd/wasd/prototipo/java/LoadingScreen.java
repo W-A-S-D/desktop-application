@@ -150,13 +150,13 @@ public class LoadingScreen extends javax.swing.JFrame {
                     j = 100;
                 }
                 if (LoadingVar == false) {
-                    this.dispose();
+                    dispose();
                     sp.setVisible(false);
                     break;
                 }
                 sp.LoadingBar.setValue(i);
             }
-            this.dispose();
+            dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
