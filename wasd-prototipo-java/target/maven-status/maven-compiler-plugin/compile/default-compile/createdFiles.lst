@@ -1,5 +1,6 @@
 br\com\wasd\wasd\prototipo\java\model\dao\UsuarioDAO.class
 br\com\wasd\wasd\prototipo\java\model\dao\PedidoDao.class
+br\com\wasd\wasd\prototipo\java\Login$5$1.class
 br\com\wasd\wasd\prototipo\java\model\Setor.class
 br\com\wasd\wasd\prototipo\java\model\Usuario.class
 br\com\wasd\wasd\prototipo\java\ConversorDouble.class
@@ -10,7 +11,6 @@ br\com\wasd\wasd\prototipo\java\Desktop$1.class
 br\com\wasd\wasd\prototipo\java\Desktop.class
 br\com\wasd\wasd\prototipo\java\mapper\DiscoMapper.class
 br\com\wasd\wasd\prototipo\java\Login$3.class
-br\com\wasd\wasd\prototipo\java\Login$7.class
 br\com\wasd\wasd\prototipo\java\model\DiscoMaquina.class
 br\com\wasd\wasd\prototipo\java\Desktop$3.class
 br\com\wasd\wasd\prototipo\java\Login.class

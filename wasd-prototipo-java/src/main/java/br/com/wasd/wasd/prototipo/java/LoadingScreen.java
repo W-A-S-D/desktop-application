@@ -9,7 +9,10 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 public class LoadingScreen extends javax.swing.JFrame {
 
+    private Boolean LoadingVar;
+
     public LoadingScreen() {
+        LoadingVar = true;
         try {
             UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (ClassNotFoundException ex) {
@@ -23,6 +26,10 @@ public class LoadingScreen extends javax.swing.JFrame {
         }
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+
+    public void setLoadingVar(Boolean LoadingVar) {
+        this.LoadingVar = LoadingVar;
     }
 
     @SuppressWarnings("unchecked")
@@ -111,45 +118,49 @@ public class LoadingScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void load(Boolean visivel) {
-                //Do whatever
+    public void load() {
+        //Do whatever
+        LoadingScreen sp = new LoadingScreen();
+        sp.setVisible(true);
+        Integer j = 100;
+        try {
+            sp.LoadingBar.setForeground(new Color(149, 173, 253));
+            for (int i = 0; i <= 100; i++) {
+                Thread.sleep(j);
+                sp.LoadingValue.setText(i + "%");
 
-                LoadingScreen sp = new LoadingScreen();
-                if (visivel) {
-                    sp.setVisible(visivel);
-                    try {
-                        sp.LoadingBar.setForeground(new Color(149, 173, 253));
-                        for (int i = 0; i <= 100; i++) {
-                            Thread.sleep(100);
-                            sp.LoadingValue.setText(i + "%");
-
-                            if (i == 10) {
-                                sp.LoadingLabel.setText("Capturando dados do sistema...");
-                            }
-                            if (i == 30) {
-                                sp.LoadingLabel.setText("Capturando dados do hardware...");
-                            }
-                            if (i == 50) {
-                                sp.LoadingLabel.setText("Conectando com o Banco de Dados...");
-                            }
-                            if (i == 70) {
-                                sp.LoadingLabel.setText("Carregando Interface...");
-                            }
-                            if (i == 85) {
-                                sp.LoadingLabel.setText("Iniciando Aplicação...");
-                            }
-                            sp.LoadingBar.setValue(i);
-
-                        }
-                    } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, e);
-                    }
-                } else {
-                    sp.dispose();
-                    sp.setVisible(visivel);
+                if (i == 10) {
+                    sp.LoadingLabel.setText("Efetuando login");
+                    j = 300;
                 }
+                if (i == 30) {
+                    sp.LoadingLabel.setText("Capturando dados do hardware...");
+                    j = 200;
+                }
+                if (i == 50) {
+                    sp.LoadingLabel.setText("Conectando com o Banco de Dados...");
+                    j = 50;
+                }
+                if (i == 70) {
+                    sp.LoadingLabel.setText("Carregando Interface...");
+                    j = 300;
+                }
+                if (i == 85) {
+                    sp.LoadingLabel.setText("Iniciando Aplicação...");
+                    j = 100;
+                }
+                if (LoadingVar == false) {
+                    this.dispose();
+                    sp.setVisible(false);
+                    break;
+                }
+                sp.LoadingBar.setValue(i);
             }
-        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BackgroundColor;

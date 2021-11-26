@@ -359,6 +359,10 @@ public class Desktop extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Desktop.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        LoadingScreen load = new LoadingScreen();
+        load.setLoadingVar(false);
+        load.setVisible(false);
+        load.dispose();
         // </editor-fold>
         // </editor-fold>
 
@@ -482,7 +486,7 @@ public class Desktop extends javax.swing.JFrame {
                     usoDisco = discoVolume.get(i).getDisponivel();
                     lblDisco.setText(Conversor.formatarBytes(discoVolume.get(i).getDisponivel()));
 
-                    LogDisco logDisco = new LogDisco(insertedLog, discos.get(i).getDisco_id(),ConversorDouble.formatarBytes(discoVolume.get(i).getDisponivel()));
+                    LogDisco logDisco = new LogDisco(insertedLog, discos.get(i).getDisco_id(), ConversorDouble.formatarBytes(discoVolume.get(i).getDisponivel()));
                     logDiscoDao.insert(logDisco);
                 }
             }
@@ -507,8 +511,8 @@ public class Desktop extends javax.swing.JFrame {
                 processosDao.insert(processo);
             }
 
-            Object[] processosAtuais = { processo.getNome(), saida.format(processo.getUsoCpu()),
-                    saida.format(processo.getUsoMemoria()) };
+            Object[] processosAtuais = {processo.getNome(), saida.format(processo.getUsoCpu()),
+                saida.format(processo.getUsoMemoria())};
             model.addRow(processosAtuais);
         });
     }
