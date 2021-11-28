@@ -16,13 +16,13 @@ br\com\wasd\wasd\prototipo\java\Desktop$3.class
 br\com\wasd\wasd\prototipo\java\Login.class
 br\com\wasd\wasd\prototipo\java\Login$2.class
 br\com\wasd\wasd\prototipo\java\model\Pedido.class
-br\com\wasd\wasd\prototipo\java\enums\TemperaturaAlerta.class
 br\com\wasd\wasd\prototipo\java\model\dao\LogDao.class
 br\com\wasd\wasd\prototipo\java\model\dao\MaquinaDao$1.class
 br\com\wasd\wasd\prototipo\java\LoadingScreen$1.class
 br\com\wasd\wasd\prototipo\java\mapper\MaquinaMapper.class
 br\com\wasd\wasd\prototipo\java\Login$5.class
 br\com\wasd\wasd\prototipo\java\model\dao\DAO.class
+br\com\wasd\wasd\prototipo\java\enums\Alerta.class
 br\com\wasd\wasd\prototipo\java\model\dao\MaquinaDao.class
 br\com\wasd\wasd\prototipo\java\model\Log.class
 br\com\wasd\wasd\prototipo\java\LoadingScreen.class

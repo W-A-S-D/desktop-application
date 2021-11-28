@@ -5,7 +5,7 @@
  */
 package br.com.wasd.wasd.prototipo.java;
 
-import br.com.wasd.wasd.prototipo.java.enums.TemperaturaAlerta;
+import br.com.wasd.wasd.prototipo.java.enums.Alerta;
 import br.com.wasd.wasd.prototipo.java.model.dao.LogDao;
 import br.com.wasd.wasd.prototipo.java.model.DiscoMaquina;
 import br.com.wasd.wasd.prototipo.java.model.Log;
@@ -35,6 +35,7 @@ import com.profesorfalken.jsensors.model.sensors.Temperature;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -460,14 +461,14 @@ public class Desktop extends javax.swing.JFrame {
         }
 
         // UPDATE DO STATUS
-        String status;
-        status = TemperaturaAlerta.fromTemperatura(temperaturaGpu);
 
         lblUsoMemoria.setText(Conversor.formatarBytes(usoRam));
         lblMemoriaDisponivel.setText(Conversor.formatarBytes(memoria.getDisponivel()));
         lblCpu.setText(usoCpu.toString());
 
         if (maquina != null) {
+            HashMap<String, Object> hardwareInfo = new HashMap<>();
+
             Log log = new Log(maquina.getMaquina_id(), usoCpu, ConversorDouble.formatarBytes(usoRam),
                     ConversorDouble.formatarBytes(usoDisco), temperaturaGpu);
             Integer insertedLog = logDao.keyInsert(log);
@@ -482,10 +483,28 @@ public class Desktop extends javax.swing.JFrame {
                     usoDisco = discoVolume.get(i).getDisponivel();
                     lblDisco.setText(Conversor.formatarBytes(discoVolume.get(i).getDisponivel()));
 
-                    LogDisco logDisco = new LogDisco(insertedLog, discos.get(i).getDisco_id(), ConversorDouble.formatarBytes(discoVolume.get(i).getDisponivel()));
+                    Long emUsoDisco = discoVolume.get(i).getTotal() - discoVolume.get(i).getDisponivel();
+
+                    hardwareInfo.put("usoDisco" + (i + 1),
+                            ConversorDouble.formatarBytes(
+                                    ((emUsoDisco * 100) / discoVolume.get(i).getTotal())));
+
+                    LogDisco logDisco = new LogDisco(insertedLog, discos.get(i).getDisco_id(),
+                            ConversorDouble.formatarBytes(emUsoDisco));
                     logDiscoDao.insert(logDisco);
                 }
             }
+
+            hardwareInfo.put("usoRam",
+                    ConversorDouble.formatarBytes(((usoRam * 100) / maquina.getRam().longValue())));
+
+            hardwareInfo.put("usoCpu", log.getFreq_cpu());
+
+            hardwareInfo.put("temperatura", log.getTemperatura());
+
+            String status = Alerta.fromLog(hardwareInfo);
+            maquina.setStatus(status);
+            maquinaDao.update(maquina);
 
         } else {
             // log
@@ -507,8 +526,8 @@ public class Desktop extends javax.swing.JFrame {
                 processosDao.insert(processo);
             }
 
-            Object[] processosAtuais = {processo.getNome(), saida.format(processo.getUsoCpu()),
-                saida.format(processo.getUsoMemoria())};
+            Object[] processosAtuais = { processo.getNome(), saida.format(processo.getUsoCpu()),
+                    saida.format(processo.getUsoMemoria()) };
             model.addRow(processosAtuais);
         });
     }
