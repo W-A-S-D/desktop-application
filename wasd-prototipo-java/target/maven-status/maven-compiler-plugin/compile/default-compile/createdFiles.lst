@@ -16,6 +16,7 @@ br\com\wasd\wasd\prototipo\java\Desktop$3.class
 br\com\wasd\wasd\prototipo\java\Login.class
 br\com\wasd\wasd\prototipo\java\Login$2.class
 br\com\wasd\wasd\prototipo\java\model\Pedido.class
+br\com\wasd\wasd\prototipo\java\SlackWebhook.class
 br\com\wasd\wasd\prototipo\java\model\dao\LogDao.class
 br\com\wasd\wasd\prototipo\java\model\dao\MaquinaDao$1.class
 br\com\wasd\wasd\prototipo\java\LoadingScreen$1.class

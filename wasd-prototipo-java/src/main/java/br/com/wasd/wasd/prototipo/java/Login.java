@@ -50,6 +50,7 @@ public class Login extends javax.swing.JFrame {
     private ProcessosGroup grupoDeProcessos;
     private PedidoDao pedidoDao;
     private String hostname;
+    private SlackWebhook slack;
 
     public Login() throws UnknownHostException {
         pedidoDao = new PedidoDao();
@@ -248,6 +249,7 @@ public class Login extends javax.swing.JFrame {
                 Pedido pedido;
                 UsuarioDAO dao = new UsuarioDAO();
                 MaquinaDao maquinaDao = new MaquinaDao();
+                slack = new SlackWebhook();
 
                 usuario = dao.login(login, senha);
                 pedido = (Pedido) pedidoDao.findOne(hostname);
@@ -261,6 +263,7 @@ public class Login extends javax.swing.JFrame {
                         if (dialogResult == 0) {
                             createRequest(usuario.getUsuario_id());
                             JOptionPane.showMessageDialog(null, "Solicitação cadastrada, aguarde aprovação.");
+                            slack.sendMessageToSlackPedidoURL(hostname + " Pedindo Acesso!");  // SLACK AQUI !  
                         }
                     } else if (pedido.getStatus() == 1) {
                         try {

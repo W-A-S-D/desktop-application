@@ -60,6 +60,7 @@ public class Desktop extends javax.swing.JFrame {
     private String hostname;
     private Integer idUser;
     MaquinaDao maquinaDao;
+    private SlackWebhook slack;
 
     /**
      * Creates new form Dash
@@ -84,6 +85,7 @@ public class Desktop extends javax.swing.JFrame {
         maquinaDao = new MaquinaDao();
         maquina = (Maquina) maquinaDao.findOne(hostname);
         this.idUser = idUser;
+        slack = new SlackWebhook();
 
         this.setLocationRelativeTo(null);
         getHardware();
@@ -412,6 +414,7 @@ public class Desktop extends javax.swing.JFrame {
                         gpuNome, "pendente");
                 Integer insertedMachine = maquinaDao.keyInsert(maquina);
                 maquina.setMaquina_id(insertedMachine);
+                slack.sendMessageToSlackHostnameURL(hostname + " Maquina Cadastrada!!!");  // SLACK AQUI !
 
                 for (Disco d : disco) {
                     DiscoMaquina discoMaquina = new DiscoMaquina(insertedMachine, d.getNome(),
@@ -450,7 +453,15 @@ public class Desktop extends javax.swing.JFrame {
                         System.out.println(temp.name + ": " + temp.value + " C");
                         temperaturaGpu = temp.value;
                         lblTempGpu.setText(temp.value + " C");
+                        if (temp.value > 80) {
+                            slack.sendMessageToSlackAlertaURL("Alerta!! Temperatura do " + hostname + ": " + temp.value + " C");  // SLACK AQUI !
+                        } else if (temp.value > 70) {
+                            slack.sendMessageToSlackAlertaURL("Atenção!! Temperatura do " + hostname + ": " + temp.value + " C");  // SLACK AQUI !
+                        } else {
+                            slack.sendMessageToSlackAlertaURL("Normal Temperatura do " + hostname + ": " + temp.value + " C");  // SLACK AQUI talvez n precise desse 
+                        }
                     }
+
                 }
             }
         }
@@ -461,7 +472,6 @@ public class Desktop extends javax.swing.JFrame {
         }
 
         // UPDATE DO STATUS
-
         lblUsoMemoria.setText(Conversor.formatarBytes(usoRam));
         lblMemoriaDisponivel.setText(Conversor.formatarBytes(memoria.getDisponivel()));
         lblCpu.setText(usoCpu.toString());
@@ -526,8 +536,8 @@ public class Desktop extends javax.swing.JFrame {
                 processosDao.insert(processo);
             }
 
-            Object[] processosAtuais = { processo.getNome(), saida.format(processo.getUsoCpu()),
-                    saida.format(processo.getUsoMemoria()) };
+            Object[] processosAtuais = {processo.getNome(), saida.format(processo.getUsoCpu()),
+                saida.format(processo.getUsoMemoria())};
             model.addRow(processosAtuais);
         });
     }
