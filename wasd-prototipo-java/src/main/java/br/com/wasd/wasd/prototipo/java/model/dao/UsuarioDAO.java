@@ -1,5 +1,6 @@
 package br.com.wasd.wasd.prototipo.java.model.dao;
 
+import br.com.wasd.wasd.prototipo.java.Bcrypt;
 import br.com.wasd.wasd.prototipo.java.Connection;
 import br.com.wasd.wasd.prototipo.java.model.Usuario;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,13 +10,20 @@ import org.springframework.dao.EmptyResultDataAccessException;
 
 public class UsuarioDAO extends DAOConnection implements DAO {
 
+    private Bcrypt bcrypt;
 
     public Usuario login(String email, String senha) {
+        bcrypt = new Bcrypt();
+        String access;
 
-        String sql = "select * from USUARIO where email =? and senha=? COLLATE SQL_Latin1_General_CP1_CS_AS";
+        String sql = "select * from USUARIO where email =? COLLATE SQL_Latin1_General_CP1_CS_AS";
         try {
-            return jdbcTemplate.queryForObject(sql, new Object[]{email, senha}, new UsuarioMapper());
-
+            access = jdbcTemplate.queryForObject(sql, new Object[]{email}, new UsuarioMapper()).getSenha();
+            if (bcrypt.checkPassDAO(senha, access) == true) {
+                return jdbcTemplate.queryForObject(sql, new Object[]{email}, new UsuarioMapper());
+            } else {
+                return null;
+            }
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
@@ -33,7 +41,7 @@ public class UsuarioDAO extends DAOConnection implements DAO {
 
     @Override
     public void insert(Object object) {
-        
+
     }
 
     @Override
