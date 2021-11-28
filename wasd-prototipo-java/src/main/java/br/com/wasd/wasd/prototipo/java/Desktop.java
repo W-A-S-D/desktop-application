@@ -6,6 +6,8 @@
 package br.com.wasd.wasd.prototipo.java;
 
 import br.com.wasd.wasd.prototipo.java.enums.TemperaturaAlerta;
+import br.com.wasd.wasd.prototipo.java.log.LogDesktop;
+import br.com.wasd.wasd.prototipo.java.log.LogHardware;
 import br.com.wasd.wasd.prototipo.java.model.dao.LogDao;
 import br.com.wasd.wasd.prototipo.java.model.DiscoMaquina;
 import br.com.wasd.wasd.prototipo.java.model.Log;
@@ -59,6 +61,8 @@ public class Desktop extends javax.swing.JFrame {
     private String hostname;
     private Integer idUser;
     MaquinaDao maquinaDao;
+    LogDesktop logDesktop = new LogDesktop();
+    LogHardware logHardware = new LogHardware();
 
     /**
      * Creates new form Dash
@@ -91,6 +95,7 @@ public class Desktop extends javax.swing.JFrame {
                 try {
                     getHardwareUse();
                 } catch (InterruptedException ex) {
+                    logDesktop.salvandoLog("Captura de dados interrompida");
                     Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -418,7 +423,7 @@ public class Desktop extends javax.swing.JFrame {
                     discoDao.insert(discoMaquina);
                 }
             } else {
-                // log
+                logDesktop.salvandoLog("Setor não encontrado");
                 System.out.println("Setor não encontrado para inserir maquina!");
             }
 
@@ -488,7 +493,7 @@ public class Desktop extends javax.swing.JFrame {
             }
 
         } else {
-            // log
+            logDesktop.salvandoLog("Máquina não encontrada");
         }
     }
 

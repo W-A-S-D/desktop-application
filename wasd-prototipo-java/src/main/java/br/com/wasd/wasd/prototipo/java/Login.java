@@ -5,6 +5,7 @@
  */
 package br.com.wasd.wasd.prototipo.java;
 
+import br.com.wasd.wasd.prototipo.java.log.LogDesktop;
 import br.com.wasd.wasd.prototipo.java.model.DiscoMaquina;
 import br.com.wasd.wasd.prototipo.java.model.Maquina;
 import br.com.wasd.wasd.prototipo.java.model.Pedido;
@@ -50,6 +51,7 @@ public class Login extends javax.swing.JFrame {
     private ProcessosGroup grupoDeProcessos;
     private PedidoDao pedidoDao;
     private String hostname;
+    LogDesktop logSalvo = new LogDesktop();
 
     public Login() throws UnknownHostException {
         pedidoDao = new PedidoDao();
@@ -263,6 +265,7 @@ public class Login extends javax.swing.JFrame {
                         if (dialogResult == 0) {
                             createRequest(usuario.getUsuario_id());
                             JOptionPane.showMessageDialog(null, "Solicitação cadastrada, aguarde aprovação.");
+                            logSalvo.salvandoLog("Solicitação de cadastro");
                         }
                     } else if (pedido.getStatus() == 1) {
                         try {
@@ -275,6 +278,7 @@ public class Login extends javax.swing.JFrame {
 
                     } else {
                         load.load(false);
+                        logSalvo.salvandoLog("Solicitação de cadastro de máquina negado");
                         JOptionPane.showMessageDialog(null,
                                 "O cadastro dessa máquina foi NEGADO!. Para mais informações informe-se em: https://wasdenterprise.atlassian.net/servicedesk/customer/user/login?destination=portals");
                     }

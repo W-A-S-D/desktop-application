@@ -35,7 +35,9 @@ br\com\wasd\wasd\prototipo\java\mapper\UsuarioMapper.class
 br\com\wasd\wasd\prototipo\java\Desktop$2.class
 br\com\wasd\wasd\prototipo\java\mapper\ProcessosMapper.class
 br\com\wasd\wasd\prototipo\java\model\dao\DAOConnection.class
+br\com\wasd\wasd\prototipo\java\log\LogDesktop.class
 br\com\wasd\wasd\prototipo\java\model\dao\LogDiscoDAO.class
+br\com\wasd\wasd\prototipo\java\log\LogHardware.class
 br\com\wasd\wasd\prototipo\java\model\dao\LogDao$1.class
 br\com\wasd\wasd\prototipo\java\model\dao\ProcessosDao.class
 br\com\wasd\wasd\prototipo\java\Login$4.class
