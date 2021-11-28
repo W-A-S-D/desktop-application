@@ -28,6 +28,7 @@ br\com\wasd\wasd\prototipo\java\model\Log.class
 br\com\wasd\wasd\prototipo\java\LoadingScreen.class
 br\com\wasd\wasd\prototipo\java\mapper\PedidoMapper.class
 br\com\wasd\wasd\prototipo\java\mapper\SetorMapper.class
+br\com\wasd\wasd\prototipo\java\Bcrypt.class
 br\com\wasd\wasd\prototipo\java\Login$6.class
 br\com\wasd\wasd\prototipo\java\Connection.class
 br\com\wasd\wasd\prototipo\java\model\LogDisco.class
