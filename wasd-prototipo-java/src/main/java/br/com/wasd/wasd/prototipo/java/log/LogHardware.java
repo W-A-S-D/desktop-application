@@ -13,16 +13,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Rai
- */
 public class LogHardware {
 
     DateTimeFormatter data = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     DateTimeFormatter dataHoraMinuto = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    List<String> listaLog = new ArrayList();
 
+    List<String> listaLog = new ArrayList();
+    
     public void salvandoLog(String MensagemLog) {
         String dataLog = dataHoraMinuto.format(LocalDateTime.now());
         listaLog.add("      " + dataLog + "\n ------------------------------ \n" + MensagemLog + "\n ------------------------------ \n");
@@ -39,11 +36,9 @@ public class LogHardware {
         String dataLog = data.format(LocalDateTime.now());
         FileWriter gerarLog = new FileWriter(String.format("%s-hardware-log.txt", dataLog));
         PrintWriter gravarLog = new PrintWriter(gerarLog);
-
-        for (String s : listaLog) {
-            gravarLog.print(s);
-        }
-
+        
+        gravarLog.print(listaLog.get(listaLog.size()-1));
+        
         gerarLog.close();
     }
 }

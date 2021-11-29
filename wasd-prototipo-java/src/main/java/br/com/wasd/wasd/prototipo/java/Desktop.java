@@ -6,8 +6,8 @@
 package br.com.wasd.wasd.prototipo.java;
 
 
-import br.com.wasd.wasd.prototipo.java.log.LogDesktop;
 import br.com.wasd.wasd.prototipo.java.log.LogHardware;
+import br.com.wasd.wasd.prototipo.java.log.LogDesktop;
 import br.com.wasd.wasd.prototipo.java.enums.Alerta;
 import br.com.wasd.wasd.prototipo.java.model.dao.LogDao;
 import br.com.wasd.wasd.prototipo.java.model.DiscoMaquina;
@@ -97,6 +97,7 @@ public class Desktop extends javax.swing.JFrame {
         new Timer().scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 try {
+                    logHardware.salvandoLog("Sistemas Teste: " + sistema);
                     getHardwareUse();
                 } catch (InterruptedException ex) {
                     logDesktop.salvandoLog("Captura de dados interrompida");
