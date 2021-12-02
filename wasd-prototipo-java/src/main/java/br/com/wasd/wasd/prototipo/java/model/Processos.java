@@ -19,6 +19,10 @@ public class Processos {
         this.atualizado = atualizado;
     }
 
+    public Processos() {
+    }
+    
+
     public Double getUsoCpu() {
         return usoCpu;
     }
