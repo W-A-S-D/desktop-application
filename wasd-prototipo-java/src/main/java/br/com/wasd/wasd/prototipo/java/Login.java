@@ -31,6 +31,7 @@ import com.github.britooo.looca.api.group.processos.ProcessosGroup;
 import com.github.britooo.looca.api.group.sistema.Sistema;
 import com.profesorfalken.jsensors.model.components.Components;
 import com.profesorfalken.jsensors.model.components.Gpu;
+import java.sql.SQLException;
 
 /**
  *
@@ -253,41 +254,47 @@ public class Login extends javax.swing.JFrame {
                 MaquinaDao maquinaDao = new MaquinaDao();
                 slack = new SlackWebhook();
 
-                usuario = dao.login(login, senha);
-                pedido = (Pedido) pedidoDao.findOne(hostname);
-                if (usuario != null) {
-                    if (pedido == null) {
-                        load.setLoadingVar(false);
-                        int dialogButton = JOptionPane.YES_NO_OPTION;
-                        int dialogResult = JOptionPane.showConfirmDialog(null,
-                                "Essa máquina não existe em nosso banco de dados, deseja solicitar o cadastro?",
-                                "Solicitação de cadastro", dialogButton);
-                        if (dialogResult == 0) {
-                            createRequest(usuario.getUsuario_id());
-                            JOptionPane.showMessageDialog(null, "Solicitação cadastrada, aguarde aprovação.");
-                            logSalvo.salvandoLog("Solicitação de cadastro");
-                            slack.sendMessageToSlackPedidoURL(hostname + " Pedindo Acesso!");  // SLACK AQUI !  
-                        }
-                    } else if (pedido.getStatus() == 1) {
-                        try {
-                            new Desktop(usuario.getUsuario_id()).setVisible(true);
-                            dispose();
-                        } catch (UnknownHostException ex) {
-                            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (InterruptedException ex) {
-                            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                try {
+                    usuario = dao.login(login, senha);
+                    pedido = (Pedido) pedidoDao.findOne(hostname);
+                    if (usuario != null) {
+                        if (pedido == null) {
+                            load.setLoadingVar(false);
+                            int dialogButton = JOptionPane.YES_NO_OPTION;
+                            int dialogResult = JOptionPane.showConfirmDialog(null,
+                                    "Essa máquina não existe em nosso banco de dados, deseja solicitar o cadastro?",
+                                    "Solicitação de cadastro", dialogButton);
+                            if (dialogResult == 0) {
+                                createRequest(usuario.getUsuario_id());
+                                JOptionPane.showMessageDialog(null, "Solicitação cadastrada, aguarde aprovação.");
+                                logSalvo.salvandoLog("Solicitação de cadastro");
+                                slack.sendMessageToSlackPedidoURL(hostname + " Pedindo Acesso!");  // SLACK AQUI !  
+                            }
+                        } else if (pedido.getStatus() == 1) {
+                            try {
+                                new Desktop(usuario.getUsuario_id()).setVisible(true);
+                                dispose();
+                            } catch (UnknownHostException ex) {
+                                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                            }
 
+                        } else {
+                            logSalvo.salvandoLog("Solicitação de cadastro de máquina negado");
+                            load.setLoadingVar(false);
+                            JOptionPane.showMessageDialog(null,
+                                    "O cadastro dessa máquina foi NEGADO!. Para mais informações informe-se em: https://wasdenterprise.atlassian.net/servicedesk/customer/user/login?destination=portals");
+                        }
                     } else {
-                        logSalvo.salvandoLog("Solicitação de cadastro de máquina negado");
                         load.setLoadingVar(false);
-                        JOptionPane.showMessageDialog(null,
-                                "O cadastro dessa máquina foi NEGADO!. Para mais informações informe-se em: https://wasdenterprise.atlassian.net/servicedesk/customer/user/login?destination=portals");
+                        JOptionPane.showMessageDialog(null, "Senha/Usuário incorreto");
                     }
-                } else {
-                    load.setLoadingVar(false);
-                    JOptionPane.showMessageDialog(null, "Senha/Usuário incorreto");
+                } catch (SQLException ex) {
+                    logSalvo.salvandoLog("Não foi possível conectar ao banco de dados");
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 }
+
             }
 
         }).start();

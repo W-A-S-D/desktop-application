@@ -2,17 +2,20 @@ package br.com.wasd.wasd.prototipo.java.model.dao;
 
 import br.com.wasd.wasd.prototipo.java.Bcrypt;
 import br.com.wasd.wasd.prototipo.java.Connection;
+import br.com.wasd.wasd.prototipo.java.log.LogDesktop;
 import br.com.wasd.wasd.prototipo.java.model.Usuario;
 import org.springframework.jdbc.core.JdbcTemplate;
 import br.com.wasd.wasd.prototipo.java.mapper.UsuarioMapper;
+import java.sql.SQLException;
 import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 public class UsuarioDAO extends DAOConnection implements DAO {
 
     private Bcrypt bcrypt;
+    LogDesktop logSalvo = new LogDesktop();
 
-    public Usuario login(String email, String senha) {
+    public Usuario login(String email, String senha)throws SQLException {
         bcrypt = new Bcrypt();
         String access;
 
@@ -25,6 +28,10 @@ public class UsuarioDAO extends DAOConnection implements DAO {
                 return null;
             }
         } catch (EmptyResultDataAccessException e) {
+            return null;
+        }catch (RuntimeException e) {
+            logSalvo.salvandoLog("Não foi possível conectar no banco");
+            System.out.println("não foi possível conectar no banco");
             return null;
         }
     }
