@@ -5,7 +5,6 @@
  */
 package br.com.wasd.wasd.prototipo.java;
 
-
 import br.com.wasd.wasd.prototipo.java.log.LogHardware;
 import br.com.wasd.wasd.prototipo.java.log.LogDesktop;
 import br.com.wasd.wasd.prototipo.java.enums.Alerta;
@@ -14,6 +13,7 @@ import br.com.wasd.wasd.prototipo.java.model.DiscoMaquina;
 import br.com.wasd.wasd.prototipo.java.model.Log;
 import br.com.wasd.wasd.prototipo.java.model.LogDisco;
 import br.com.wasd.wasd.prototipo.java.model.Maquina;
+import br.com.wasd.wasd.prototipo.java.model.Processos;
 import br.com.wasd.wasd.prototipo.java.model.Setor;
 import br.com.wasd.wasd.prototipo.java.model.dao.DiscoDao;
 import br.com.wasd.wasd.prototipo.java.model.dao.LogDiscoDAO;
@@ -65,7 +65,7 @@ public class Desktop extends javax.swing.JFrame {
     MaquinaDao maquinaDao;
     LogDesktop logDesktop = new LogDesktop();
     LogHardware logHardware = new LogHardware();
-    private SlackWebhook slack;
+    // private SlackWebhook slack;
 
     /**
      * Creates new form Dash
@@ -90,7 +90,7 @@ public class Desktop extends javax.swing.JFrame {
         maquinaDao = new MaquinaDao();
         maquina = (Maquina) maquinaDao.findOne(hostname);
         this.idUser = idUser;
-        slack = new SlackWebhook();
+        // slack = new SlackWebhook();
 
         this.setLocationRelativeTo(null);
         getHardware();
@@ -421,7 +421,7 @@ public class Desktop extends javax.swing.JFrame {
                         gpuNome, "pendente");
                 Integer insertedMachine = maquinaDao.keyInsert(maquina);
                 maquina.setMaquina_id(insertedMachine);
-                slack.sendMessageToSlackHostnameURL(hostname + " Maquina Cadastrada!!!");  // SLACK AQUI !
+                // slack.sendMessageToSlackHostnameURL(hostname + " Maquina Cadastrada!!!"); // SLACK AQUI !
 
                 for (Disco d : disco) {
                     DiscoMaquina discoMaquina = new DiscoMaquina(insertedMachine, d.getNome(),
@@ -461,11 +461,16 @@ public class Desktop extends javax.swing.JFrame {
                         temperaturaGpu = temp.value;
                         lblTempGpu.setText(temp.value + " C");
                         if (temp.value > 80) {
-                            slack.sendMessageToSlackAlertaURL("Alerta!! Temperatura do " + hostname + ": " + temp.value + " C");  // SLACK AQUI !
+                            // slack.sendMessageToSlackAlertaURL(
+                                    // "Alerta!! Temperatura do " + hostname + ": " + temp.value + " C"); // SLACK AQUI !
                         } else if (temp.value > 70) {
-                            slack.sendMessageToSlackAlertaURL("Atenção!! Temperatura do " + hostname + ": " + temp.value + " C");  // SLACK AQUI !
+                            // slack.sendMessageToSlackAlertaURL(
+                                    // "Atenção!! Temperatura do " + hostname + ": " + temp.value + " C"); // SLACK AQUI !
                         } else {
-                            slack.sendMessageToSlackAlertaURL("Normal Temperatura do " + hostname + ": " + temp.value + " C");  // SLACK AQUI talvez n precise desse 
+                            // slack.sendMessageToSlackAlertaURL(
+                                    // "Normal Temperatura do " + hostname + ": " + temp.value + " C"); // SLACK AQUI
+                                                                                                     // talvez n precise
+                                                                                                     // desse
                         }
                     }
 
@@ -536,15 +541,17 @@ public class Desktop extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tbProcessos.getModel();
 
         processos.forEach(processo -> {
+            Processos newProcesso = new Processos(maquina.getMaquina_id(), processo.getNome(), processo.getUsoCpu(),
+                    processo.getUsoMemoria());
 
-            if (processosDao.findOne(processo.getNome()) != null) {
-                processosDao.update(processo);
+            if (processosDao.findOne(newProcesso.getNome(), newProcesso.getFk_maquina()) != null) {
+                processosDao.update(newProcesso);
             } else {
-                processosDao.insert(processo);
+                processosDao.insert(newProcesso);
             }
 
-            Object[] processosAtuais = {processo.getNome(), saida.format(processo.getUsoCpu()),
-                saida.format(processo.getUsoMemoria())};
+            Object[] processosAtuais = { processo.getNome(), saida.format(processo.getUsoCpu()),
+                    saida.format(processo.getUsoMemoria()) };
             model.addRow(processosAtuais);
         });
     }
