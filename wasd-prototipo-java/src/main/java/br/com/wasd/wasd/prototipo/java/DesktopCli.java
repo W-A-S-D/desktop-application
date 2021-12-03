@@ -79,9 +79,14 @@ public class DesktopCli {
         new Timer().scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 try {
-                    logHardware.salvandoLog("Sistemas Teste: " + sistema);
+                    logHardware.salvandoLog("Sistemas Teste: " + sistema + "\n\n"
+                            + memoria + "\n\n"
+                            + "Processador: " + processador + "\n"
+                            + "HostName: " + hostname + "\n\n"
+                            + "Máquina: " + maquina + "\n\n");
                     getHardwareUse();
                 } catch (InterruptedException ex) {
+                    logDesktop.salvandoLog("Captura de dados interrompida");
                     //Logger.getLogger(Desktop.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -141,7 +146,6 @@ public class DesktopCli {
                 }
 
             } else {
-                // log
                 logDesktop.salvandoLog("Setor não encontrado");
                 System.out.println("Setor não encontrado para inserir maquina!");
             }
@@ -186,7 +190,6 @@ public class DesktopCli {
         for (Volume volume : discoVolume) {
             usoDisco = volume.getDisponivel();
             System.out.println("Volume do disco: " + Conversor.formatarBytes(volume.getDisponivel()));
-            //lblDisco.setText(Conversor.formatarBytes(volume.getDisponivel()));
         }
 
         // UPDATE DO STATUS
@@ -200,6 +203,7 @@ public class DesktopCli {
             Log log = new Log(maquina.getMaquina_id(), usoCpu, ConversorDouble.formatarBytes(usoRam),
                     ConversorDouble.formatarBytes(usoDisco), temperaturaGpu);
             Integer insertedLog = logDao.keyInsert(log);
+            System.out.println("");
             System.out.println("log id: " + insertedLog);
 
             DiscoDao discoDao = new DiscoDao();
@@ -219,6 +223,7 @@ public class DesktopCli {
                     LogDisco logDisco = new LogDisco(insertedLog, discos.get(i).getDisco_id(),
                             ConversorDouble.formatarBytes(emUsoDisco));
                     logDiscoDao.insert(logDisco);
+                    System.out.println("Uso disco: " + (Conversor.formatarBytes(usoDisco)));
                 }
             }
 
@@ -243,7 +248,6 @@ public class DesktopCli {
         DecimalFormat saida = new DecimalFormat("0.00");
         ProcessosDao processosDao = new ProcessosDao();
 
-        //DefaultTableModel model = (DefaultTableModel) tbProcessos.getModel();
         processos.forEach(processo -> {
             Processos newProcesso = new Processos(maquina.getMaquina_id(), processo.getNome(), processo.getUsoCpu(),
                     processo.getUsoMemoria());
@@ -253,10 +257,6 @@ public class DesktopCli {
             } else {
                 processosDao.insert(newProcesso);
             }
-
-            Object[] processosAtuais = {processo.getNome(), saida.format(processo.getUsoCpu()),
-                saida.format(processo.getUsoMemoria())};
-            //model.addRow(processosAtuais);
         });
     }
 }

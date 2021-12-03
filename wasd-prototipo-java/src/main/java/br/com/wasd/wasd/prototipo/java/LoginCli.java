@@ -107,9 +107,9 @@ public class LoginCli {
                         pb.stepBy(30); // step by n
                         new DesktopCli(pb, usuario.getUsuario_id());
                     } catch (UnknownHostException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(LoginCli.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(LoginCli.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     System.out.println("O cadastro dessa máquina foi NEGADO!. Para mais informações informe-se em: https://wasdenterprise.atlassian.net/servicedesk/customer/user/login?destination=portals");
