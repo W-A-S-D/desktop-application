@@ -88,18 +88,13 @@
             <version>2.0.0-alpha0</version>
             <scope>runtime</scope>
         </dependency> 
-        
-        <dependency>
-            <groupId>com.github.britooo</groupId>
-            <artifactId>looca-api</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-        
+          
         <dependency>
             <groupId>io.github.cdimascio</groupId>
             <artifactId>dotenv-java</artifactId>
             <version>2.2.0</version>
         </dependency>
+        
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
@@ -107,4 +102,5 @@
             <type>jar</type>
         </dependency>
     </dependencies>
+    <name>cli-wasd-prototipo-java</name>
 </project>

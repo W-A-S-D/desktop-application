@@ -6,6 +6,7 @@
 package br.com.wasd.wasd.prototipo.java.model.dao;
 
 import br.com.wasd.wasd.prototipo.java.Connection;
+import br.com.wasd.wasd.prototipo.java.MysqlConnection;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -14,9 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class DAOConnection {
     
-    protected Connection config = new Connection();
+    protected MysqlConnection config = new MysqlConnection();
     protected JdbcTemplate jdbcTemplate = new JdbcTemplate(config.getDataSource());
-
-   
 
 }

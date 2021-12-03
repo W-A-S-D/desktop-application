@@ -1,10 +1,10 @@
-      2021-11-29 19:10:17
+      2021-12-03 20:10:19
  ------------------------------ 
 Sistemas Teste: Sistema operacional: Windows
 Fabricante: Microsoft
 Arquitetura: 64 bits.
-Inicializado: 2021-11-24T21:44:18Z
-Tempo de atividade: 5 days, 00:27:07
+Inicializado: 2021-12-03T12:13:13Z
+Tempo de atividade: 0 days, 11:10:52
 Permissões:
 Executando como usuário padrão
  ------------------------------ 

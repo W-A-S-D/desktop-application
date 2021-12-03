@@ -19,7 +19,7 @@ public class UsuarioDAO extends DAOConnection implements DAO {
         bcrypt = new Bcrypt();
         String access;
 
-        String sql = "select * from USUARIO where email =? COLLATE SQL_Latin1_General_CP1_CS_AS";
+        String sql = "select * from USUARIO where email =?";
         try {
             access = jdbcTemplate.queryForObject(sql, new Object[]{email}, new UsuarioMapper()).getSenha();
             if (bcrypt.checkPassDAO(senha, access) == true) {

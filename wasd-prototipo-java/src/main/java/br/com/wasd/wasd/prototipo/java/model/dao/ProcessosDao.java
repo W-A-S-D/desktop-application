@@ -56,8 +56,6 @@ public class ProcessosDao extends DAOConnection implements DAO {
         String sql = "insert into processo(fk_maquina, nome, usoCpu, usoMemoria) values (?, ?, ?, ?)";
         Processos processo = (Processos) object;
         jdbcTemplate.update(sql, processo.getFk_maquina() ,processo.getNome(), processo.getUsoCpu(), processo.getUsoMemoria());
-
-        System.out.println("Processos inserido com sucesso!");
     }
 
     @Override
